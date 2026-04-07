@@ -1,8 +1,7 @@
 aid: statorium
 name: Statorium
 description: >-
-  Statorium sports data can be delivered in three ways to your sports site or
-  app. 
+  Statorium sports data can be delivered in three ways to your sports site or app.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -18,8 +17,8 @@ apis:
   - aid: statorium:statorium
     name: Statorium
     description: >-
-      Statorium sports data can be delivered in three ways to your sports site
-      or app. 
+      Statorium sports data can be delivered in three ways to your sports site or
+      app.
     humanURL: ' https://statorium.com/'
     tags:
       - API
