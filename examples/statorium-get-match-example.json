@@ -1,0 +1,65 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.statorium.com/api/v1/matches/98765/?apikey=your_api_token"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": 98765,
+      "homeTeam": {
+        "id": 42,
+        "name": "Manchester City",
+        "nameTranslated": "Manchester City"
+      },
+      "awayTeam": {
+        "id": 33,
+        "name": "Liverpool",
+        "nameTranslated": "Liverpool"
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "status": "finished",
+      "matchDate": "2026-04-15T19:45:00Z",
+      "leagueId": 1,
+      "seasonId": 2526,
+      "minute": 90,
+      "venue": "Etihad Stadium",
+      "referee": "Michael Oliver",
+      "homeLineup": [
+        { "playerId": 1001, "name": "Ederson", "position": "Goalkeeper", "shirtNumber": 31, "isStarting": true },
+        { "playerId": 1002, "name": "Kyle Walker", "position": "Defender", "shirtNumber": 2, "isStarting": true }
+      ],
+      "awayLineup": [
+        { "playerId": 2001, "name": "Alisson", "position": "Goalkeeper", "shirtNumber": 1, "isStarting": true },
+        { "playerId": 2002, "name": "Trent Alexander-Arnold", "position": "Defender", "shirtNumber": 66, "isStarting": true }
+      ],
+      "events": [
+        { "minute": 23, "type": "goal", "playerId": 1005, "teamId": 42 },
+        { "minute": 55, "type": "goal", "playerId": 2010, "teamId": 33 },
+        { "minute": 78, "type": "goal", "playerId": 1008, "teamId": 42 }
+      ],
+      "statistics": {
+        "homePossession": 58.3,
+        "awayPossession": 41.7,
+        "homeShots": 14,
+        "awayShots": 9,
+        "homeShotsOnTarget": 6,
+        "awayShotsOnTarget": 4,
+        "homeCorners": 7,
+        "awayCorners": 4
+      },
+      "headToHead": [
+        {
+          "id": 88888,
+          "homeTeam": { "id": 33, "name": "Liverpool" },
+          "awayTeam": { "id": 42, "name": "Manchester City" },
+          "homeScore": 1,
+          "awayScore": 1,
+          "status": "finished",
+          "matchDate": "2025-11-10T19:45:00Z"
+        }
+      ]
+    }
+  }
+}

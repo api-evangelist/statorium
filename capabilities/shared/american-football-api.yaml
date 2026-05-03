@@ -1,0 +1,232 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Statorium American Football API"
+  description: "Statorium American Football API providing NFL scores, schedules, team and player data, standings, and daily news feeds."
+  tags:
+    - American Football
+    - NFL
+    - Sports Data
+    - Live Scores
+    - Statistics
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      STATORIUM_API_KEY: STATORIUM_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: statorium-nfl
+      baseUri: https://api.statorium.com/api/v1
+      description: "Statorium American Football (NFL) API."
+      authentication:
+        type: apikey
+        key: apikey
+        value: "{{STATORIUM_API_KEY}}"
+        placement: query
+      resources:
+        - name: nfl-games
+          path: /nfl/games/
+          description: "NFL games."
+          operations:
+            - name: list-nfl-games
+              method: GET
+              description: "Returns NFL games filtered by week, season, team, or status."
+              inputParameters:
+                - name: week
+                  in: query
+                  type: integer
+                  required: false
+                  description: "NFL week number."
+                - name: season
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Season year."
+                - name: teamId
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Filter by team."
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by status."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-nfl-game
+              method: GET
+              description: "Returns full NFL game details."
+              inputParameters:
+                - name: gameId
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Game identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: nfl-teams
+          path: /nfl/teams/
+          description: "NFL teams."
+          operations:
+            - name: list-nfl-teams
+              method: GET
+              description: "Returns all NFL teams."
+              inputParameters:
+                - name: conference
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by conference (AFC, NFC)."
+                - name: division
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by division."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: nfl-standings
+          path: /nfl/standings/
+          description: "NFL standings."
+          operations:
+            - name: get-nfl-standings
+              method: GET
+              description: "Returns NFL standings by division."
+              inputParameters:
+                - name: season
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Season year."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: nfl-news
+          path: /nfl/news/
+          description: "NFL news."
+          operations:
+            - name: list-nfl-news
+              method: GET
+              description: "Returns NFL news articles linked to players and teams."
+              inputParameters:
+                - name: teamId
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Filter by team."
+                - name: playerId
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Filter by player."
+                - name: count
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Number of items to return."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: statorium-nfl-rest
+      resources:
+        - path: /v1/nfl/games
+          name: nfl-games
+          description: "NFL game listings."
+          operations:
+            - method: GET
+              name: list-nfl-games
+              description: "List NFL games with filtering."
+              call: "statorium-nfl.list-nfl-games"
+              with:
+                week: "rest.week"
+                season: "rest.season"
+                teamId: "rest.teamId"
+                status: "rest.status"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/nfl/news
+          name: nfl-news
+          description: "NFL news feed."
+          operations:
+            - method: GET
+              name: list-nfl-news
+              description: "List NFL news articles."
+              call: "statorium-nfl.list-nfl-news"
+              with:
+                teamId: "rest.teamId"
+                count: "rest.count"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: statorium-nfl-mcp
+      transport: http
+      tools:
+        - name: list-nfl-games
+          description: "List NFL games filtered by week, season, team, or status."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "statorium-nfl.list-nfl-games"
+          with:
+            week: "tools.week"
+            season: "tools.season"
+            teamId: "tools.teamId"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-nfl-standings
+          description: "Get NFL standings by conference and division."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "statorium-nfl.get-nfl-standings"
+          with:
+            season: "tools.season"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-nfl-news
+          description: "Get latest NFL news linked to players and teams."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "statorium-nfl.list-nfl-news"
+          with:
+            teamId: "tools.teamId"
+            count: "tools.count"
+          outputParameters:
+            - type: object
+              mapping: "$."

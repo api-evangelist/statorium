@@ -1,0 +1,413 @@
+openapi: 3.1.0
+info:
+  title: Statorium Basketball API
+  description: >-
+    The Statorium Basketball API provides live basketball data including
+    NBA live scores, game results, standings, player statistics, and team
+    information delivered in JSON format. The API covers major basketball
+    leagues and competitions with real-time score updates, box scores,
+    schedules, and player/team statistics.
+  version: '1.0.0'
+  contact:
+    name: Statorium Support
+    url: https://statorium.com/
+  termsOfService: https://statorium.com/
+externalDocs:
+  description: Statorium API Documentation
+  url: https://statorium.com/stats-api-documentation
+servers:
+  - url: https://api.statorium.com/api/v1
+    description: Statorium API Server
+tags:
+  - name: Games
+    description: Access basketball game data including live scores and results.
+  - name: Teams
+    description: Retrieve basketball team information and statistics.
+  - name: Players
+    description: Access basketball player profiles and statistics.
+  - name: Standings
+    description: Retrieve league standings and division rankings.
+  - name: Leagues
+    description: Access basketball league listings and metadata.
+security:
+  - apiKey: []
+paths:
+  /basketball/leagues/:
+    get:
+      operationId: listBasketballLeagues
+      summary: List Basketball Leagues
+      description: >-
+        Returns all basketball leagues and competitions accessible with
+        the authenticated token.
+      tags:
+        - Leagues
+      parameters:
+        - $ref: '#/components/parameters/ApiKeyParam'
+      responses:
+        '200':
+          description: List of basketball leagues
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  leagues:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/League'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /basketball/games/:
+    get:
+      operationId: listBasketballGames
+      summary: List Basketball Games
+      description: >-
+        Returns basketball games filtered by league, season, team, or date.
+        Includes live, scheduled, and completed games with scores.
+      tags:
+        - Games
+      parameters:
+        - $ref: '#/components/parameters/ApiKeyParam'
+        - name: leagueId
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filter games by league ID.
+        - name: date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: Filter games by date (YYYY-MM-DD).
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - live
+              - scheduled
+              - finished
+          description: Filter games by status.
+      responses:
+        '200':
+          description: List of games
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  games:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Game'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /basketball/games/{gameId}/:
+    get:
+      operationId: getBasketballGame
+      summary: Get Basketball Game
+      description: >-
+        Returns full details for a specific basketball game including
+        quarter scores, box score statistics, and lineups.
+      tags:
+        - Games
+      parameters:
+        - $ref: '#/components/parameters/ApiKeyParam'
+        - name: gameId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique game identifier.
+      responses:
+        '200':
+          description: Game details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /basketball/standings/:
+    get:
+      operationId: getBasketballStandings
+      summary: Get Basketball Standings
+      description: >-
+        Returns standings for a basketball league including team win/loss
+        records, points, and division/conference rankings.
+      tags:
+        - Standings
+      parameters:
+        - $ref: '#/components/parameters/ApiKeyParam'
+        - name: leagueId
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The league ID.
+      responses:
+        '200':
+          description: League standings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  standings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StandingEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /basketball/teams/{teamId}/:
+    get:
+      operationId: getBasketballTeam
+      summary: Get Basketball Team
+      description: >-
+        Returns detailed information about a basketball team including
+        roster and season statistics.
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/ApiKeyParam'
+        - name: teamId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique team identifier.
+      responses:
+        '200':
+          description: Team details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /basketball/players/{playerId}/:
+    get:
+      operationId: getBasketballPlayer
+      summary: Get Basketball Player
+      description: >-
+        Returns detailed information about a basketball player including
+        profile and season statistics.
+      tags:
+        - Players
+      parameters:
+        - $ref: '#/components/parameters/ApiKeyParam'
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The unique player identifier.
+      responses:
+        '200':
+          description: Player details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
+      description: API token provided upon subscription purchase.
+  parameters:
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token.
+  schemas:
+    League:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        country:
+          type: string
+        logoUrl:
+          type: string
+          format: uri
+    Game:
+      type: object
+      description: A basketball game with score and status.
+      properties:
+        id:
+          type: integer
+        homeTeam:
+          $ref: '#/components/schemas/TeamRef'
+        awayTeam:
+          $ref: '#/components/schemas/TeamRef'
+        homeScore:
+          type: integer
+        awayScore:
+          type: integer
+        status:
+          type: string
+          enum:
+            - live
+            - scheduled
+            - finished
+        gameDate:
+          type: string
+          format: date-time
+        quarter:
+          type: integer
+          description: Current quarter for live games.
+        timeRemaining:
+          type: string
+          description: Time remaining in the current quarter.
+    GameDetail:
+      allOf:
+        - $ref: '#/components/schemas/Game'
+        - type: object
+          properties:
+            quarterScores:
+              type: array
+              items:
+                type: object
+                properties:
+                  quarter:
+                    type: integer
+                  homeScore:
+                    type: integer
+                  awayScore:
+                    type: integer
+            playerStats:
+              type: array
+              items:
+                $ref: '#/components/schemas/PlayerGameStats'
+    TeamRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        city:
+          type: string
+        conference:
+          type: string
+        division:
+          type: string
+        logoUrl:
+          type: string
+          format: uri
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        position:
+          type: string
+        teamId:
+          type: integer
+        jerseyNumber:
+          type: integer
+        nationality:
+          type: string
+        height:
+          type: string
+        weight:
+          type: string
+    PlayerGameStats:
+      type: object
+      description: Player statistics for a single game.
+      properties:
+        playerId:
+          type: integer
+        name:
+          type: string
+        teamId:
+          type: integer
+        points:
+          type: integer
+        rebounds:
+          type: integer
+        assists:
+          type: integer
+        steals:
+          type: integer
+        blocks:
+          type: integer
+        turnovers:
+          type: integer
+        minutesPlayed:
+          type: string
+        fieldGoalsMade:
+          type: integer
+        fieldGoalsAttempted:
+          type: integer
+        threePointersMade:
+          type: integer
+        threePointersAttempted:
+          type: integer
+        freeThrowsMade:
+          type: integer
+        freeThrowsAttempted:
+          type: integer
+    StandingEntry:
+      type: object
+      properties:
+        position:
+          type: integer
+        team:
+          $ref: '#/components/schemas/TeamRef'
+        wins:
+          type: integer
+        losses:
+          type: integer
+        winPercentage:
+          type: number
+        gamesBehind:
+          type: number
+        points:
+          type: integer
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string

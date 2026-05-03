@@ -1,0 +1,49 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.statorium.com/api/v1/standings/?apikey=your_api_token&leagueId=1"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "standings": [
+        {
+          "position": 1,
+          "team": { "id": 42, "name": "Manchester City" },
+          "played": 32,
+          "won": 22,
+          "drawn": 6,
+          "lost": 4,
+          "goalsFor": 71,
+          "goalsAgainst": 32,
+          "goalDifference": 39,
+          "points": 72
+        },
+        {
+          "position": 2,
+          "team": { "id": 33, "name": "Liverpool" },
+          "played": 32,
+          "won": 21,
+          "drawn": 5,
+          "lost": 6,
+          "goalsFor": 68,
+          "goalsAgainst": 35,
+          "goalDifference": 33,
+          "points": 68
+        },
+        {
+          "position": 3,
+          "team": { "id": 15, "name": "Arsenal" },
+          "played": 32,
+          "won": 19,
+          "drawn": 7,
+          "lost": 6,
+          "goalsFor": 62,
+          "goalsAgainst": 30,
+          "goalDifference": 32,
+          "points": 64
+        }
+      ]
+    }
+  }
+}

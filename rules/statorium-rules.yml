@@ -1,0 +1,119 @@
+extends: spectral:oas
+rules:
+  statorium-api-key-in-query:
+    description: >-
+      Statorium APIs require the API key as a query parameter named "apikey".
+      All paths should declare this parameter requirement.
+    message: >-
+      Statorium API operations must require the "apikey" query parameter for
+      authentication.
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            parameters:
+              type: array
+              contains:
+                type: object
+                properties:
+                  name:
+                    const: apikey
+                  in:
+                    const: query
+                  required:
+                    const: true
+
+  statorium-trailing-slash-paths:
+    description: >-
+      Statorium API paths consistently use trailing slashes for collection
+      endpoints. Paths should end with "/" for list operations.
+    message: >-
+      Collection endpoints (list operations) should end with a trailing slash
+      to match the Statorium API convention.
+    severity: hint
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: ".*\/$"
+
+  statorium-integer-ids:
+    description: >-
+      Statorium uses integer IDs for all entity identifiers (leagues, teams,
+      players, matches). Path parameters for IDs should be typed as integer.
+    message: >-
+      Path parameters named "leagueId", "teamId", "playerId", or "matchId"
+      should have type integer.
+    severity: warn
+    given: "$.paths[*][*].parameters[?(@.in == 'path')][?(@.name =~ /(leagueId|teamId|playerId|matchId|gameId)/)]"
+    then:
+      field: schema.type
+      function: enumeration
+      functionOptions:
+        values:
+          - integer
+
+  statorium-operation-ids-camel-case:
+    description: >-
+      Statorium API operation IDs use camelCase naming convention.
+    message: "Operation IDs should use camelCase ({{value}} does not match)."
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+
+  statorium-summaries-title-case:
+    description: >-
+      All operation summaries in Statorium APIs must use Title Case for
+      consistency and readability.
+    message: "Operation summary '{{value}}' should be in Title Case."
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9]*(\\s[A-Z][a-zA-Z0-9]*)*$"
+
+  statorium-tags-defined:
+    description: >-
+      Every operation must have at least one tag for proper grouping and
+      documentation in the Statorium API.
+    message: "Operations must have at least one tag."
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  statorium-200-responses-json:
+    description: >-
+      Statorium API success responses should return application/json content
+      as the primary content type.
+    message: "Success responses should include application/json content."
+    severity: warn
+    given: "$.paths[*][*].responses['200'].content"
+    then:
+      function: truthy
+
+  statorium-status-enum-values:
+    description: >-
+      Statorium uses consistent status values (live, scheduled, finished)
+      for match/game status fields across all sports APIs.
+    message: >-
+      Status fields should use the standard Statorium status values:
+      live, scheduled, finished.
+    severity: hint
+    given: "$.components.schemas[*].properties.status.enum"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          items:
+            type: string

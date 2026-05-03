@@ -1,0 +1,16 @@
+{
+  "name": "Team",
+  "description": "A sports team with full profile and squad information.",
+  "fields": [
+    { "name": "id", "type": "integer", "required": true, "description": "Unique team identifier." },
+    { "name": "name", "type": "string", "required": true, "description": "Team name." },
+    { "name": "nameTranslated", "type": "string", "required": false, "description": "Translated team name." },
+    { "name": "country", "type": "string", "required": false, "description": "Team country." },
+    { "name": "logoUrl", "type": "uri", "required": false, "description": "Team logo URL." },
+    { "name": "founded", "type": "integer", "required": false, "description": "Year founded." },
+    { "name": "stadium", "type": "string", "required": false, "description": "Home stadium name." },
+    { "name": "city", "type": "string", "required": false, "description": "Team city." },
+    { "name": "conference", "type": "string", "required": false, "description": "Conference name." },
+    { "name": "division", "type": "string", "required": false, "description": "Division name." }
+  ]
+}

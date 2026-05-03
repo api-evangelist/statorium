@@ -1,0 +1,157 @@
+name: Statorium Vocabulary
+description: >-
+  Domain vocabulary for the Statorium Sports Data API covering sports
+  competitions, match data, teams, players, and statistics.
+version: '1.0.0'
+created: '2026-05-02'
+modified: '2026-05-02'
+
+terms:
+  - term: League
+    definition: >-
+      An organized sports competition with a defined set of participating teams
+      competing over a season. Examples include the English Premier League,
+      NBA, and NFL.
+    synonyms:
+      - Competition
+      - Tournament
+      - Division
+    tags:
+      - Sports
+      - Organization
+
+  - term: Season
+    definition: >-
+      A defined period of competition within a league, typically spanning an
+      annual cycle. Identified by start and end dates and a season ID.
+    tags:
+      - Sports
+      - Time
+
+  - term: Match
+    definition: >-
+      A single competitive event between two teams in a sports league.
+      In basketball and American football contexts referred to as a "game".
+    synonyms:
+      - Game
+      - Fixture
+      - Contest
+    tags:
+      - Sports
+      - Event
+
+  - term: Fixture
+    definition: >-
+      A scheduled future match. Used interchangeably with "match" or "game"
+      when referring to upcoming events.
+    synonyms:
+      - Schedule
+      - Match
+    tags:
+      - Sports
+      - Scheduling
+
+  - term: Live Score
+    definition: >-
+      Real-time score updates for a match currently in progress, updated
+      as goals, points, or runs are scored.
+    tags:
+      - Sports
+      - Real-Time
+
+  - term: Standing
+    definition: >-
+      A team's position in the league table based on points accumulated from
+      match results. Includes points, wins, draws, losses, and goal difference.
+    synonyms:
+      - Table
+      - Rankings
+    tags:
+      - Sports
+      - Statistics
+
+  - term: Lineup
+    definition: >-
+      The list of players selected to play in a specific match, including
+      starting eleven and substitutes.
+    synonyms:
+      - Starting XI
+      - Squad
+    tags:
+      - Sports
+      - Players
+
+  - term: Head-to-Head
+    definition: >-
+      Historical record of previous matches between two specific teams,
+      used to analyze team rivalry and comparative performance.
+    abbreviations:
+      - H2H
+    tags:
+      - Sports
+      - Statistics
+      - History
+
+  - term: API Token
+    definition: >-
+      Authentication credential required to access the Statorium API.
+      Provided upon subscription purchase and passed as "apikey" query
+      parameter in all requests.
+    synonyms:
+      - API Key
+      - Access Token
+    tags:
+      - Authentication
+      - Security
+
+  - term: Goal Difference
+    definition: >-
+      The arithmetic difference between goals scored (goalsFor) and goals
+      conceded (goalsAgainst), used as a tiebreaker in league standings.
+    tags:
+      - Football
+      - Statistics
+
+  - term: Match Minute
+    definition: >-
+      The current elapsed time in a live match measured in minutes, used
+      to place events chronologically within a match.
+    tags:
+      - Football
+      - Real-Time
+
+  - term: Translated Name
+    definition: >-
+      Localized translation of a player or team name provided when available,
+      supporting multilingual sports platforms.
+    tags:
+      - Localization
+      - Players
+      - Teams
+
+  - term: League Logo
+    definition: >-
+      An image URL for a league's official logo, available through the
+      Get League by ID endpoint.
+    tags:
+      - Media
+      - Leagues
+
+categories:
+  - name: Sports
+    terms:
+      - League
+      - Season
+      - Match
+      - Fixture
+      - Standing
+      - Lineup
+      - Head-to-Head
+      - Goal Difference
+      - Match Minute
+  - name: Data Access
+    terms:
+      - API Token
+      - Live Score
+      - Translated Name
+      - League Logo

@@ -1,0 +1,326 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Statorium Sports Data"
+  description: >-
+    Unified sports data capability combining Statorium's Football, Basketball,
+    and American Football APIs into a single workflow. Enables sports platforms,
+    fantasy sports apps, and media publishers to access live scores, standings,
+    match details, and news across all sports from a single integration.
+  tags:
+    - Sports
+    - Sports Data
+    - Football
+    - Soccer
+    - Basketball
+    - American Football
+    - NFL
+    - NBA
+    - Live Scores
+    - Statistics
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      STATORIUM_API_KEY: STATORIUM_API_KEY
+
+capability:
+  consumes:
+    - import: statorium-football
+      location: ./shared/football-api.yaml
+    - import: statorium-basketball
+      location: ./shared/basketball-api.yaml
+    - import: statorium-nfl
+      location: ./shared/american-football-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: statorium-sports-api
+      description: "Unified REST API for accessing live sports data across football, basketball, and NFL."
+      resources:
+        - path: /v1/leagues
+          name: leagues
+          description: "Football league listings."
+          operations:
+            - method: GET
+              name: list-football-leagues
+              description: "List all accessible football leagues."
+              call: "statorium-football.list-leagues"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/matches
+          name: matches
+          description: "Football match listings and live scores."
+          operations:
+            - method: GET
+              name: list-matches
+              description: "List football matches filtered by league, date, or status."
+              call: "statorium-football.list-matches"
+              with:
+                leagueId: "rest.leagueId"
+                date: "rest.date"
+                status: "rest.status"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/matches/{matchId}
+          name: match
+          description: "Individual football match details."
+          operations:
+            - method: GET
+              name: get-match
+              description: "Get football match details with lineups and head-to-head."
+              call: "statorium-football.get-match"
+              with:
+                matchId: "rest.matchId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/standings
+          name: standings
+          description: "Football league standings."
+          operations:
+            - method: GET
+              name: get-standings
+              description: "Get football league standings table."
+              call: "statorium-football.get-standings"
+              with:
+                leagueId: "rest.leagueId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/basketball/games
+          name: basketball-games
+          description: "Basketball game listings."
+          operations:
+            - method: GET
+              name: list-basketball-games
+              description: "List basketball games."
+              call: "statorium-basketball.list-basketball-games"
+              with:
+                leagueId: "rest.leagueId"
+                date: "rest.date"
+                status: "rest.status"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/nfl/games
+          name: nfl-games
+          description: "NFL game listings."
+          operations:
+            - method: GET
+              name: list-nfl-games
+              description: "List NFL games filtered by week, season, or team."
+              call: "statorium-nfl.list-nfl-games"
+              with:
+                week: "rest.week"
+                season: "rest.season"
+                teamId: "rest.teamId"
+                status: "rest.status"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/nfl/news
+          name: nfl-news
+          description: "NFL news feed."
+          operations:
+            - method: GET
+              name: list-nfl-news
+              description: "List latest NFL news."
+              call: "statorium-nfl.list-nfl-news"
+              with:
+                teamId: "rest.teamId"
+                count: "rest.count"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/nfl/standings
+          name: nfl-standings
+          description: "NFL standings."
+          operations:
+            - method: GET
+              name: get-nfl-standings
+              description: "Get NFL standings by division."
+              call: "statorium-nfl.get-nfl-standings"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: statorium-sports-mcp
+      transport: http
+      description: "MCP server for AI-assisted access to live sports data across football, basketball, and NFL."
+      tools:
+        - name: list-football-leagues
+          description: "List all accessible football and soccer leagues."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "statorium-football.list-leagues"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-football-matches
+          description: "List football/soccer matches filtered by league, date, team, or live status."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "statorium-football.list-matches"
+          with:
+            leagueId: "tools.leagueId"
+            date: "tools.date"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-football-match
+          description: "Get full football match details including lineups, events, stats, and head-to-head history."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "statorium-football.get-match"
+          with:
+            matchId: "tools.matchId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-football-standings
+          description: "Get the current standings table for a football league."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "statorium-football.get-standings"
+          with:
+            leagueId: "tools.leagueId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-football-team
+          description: "Get football team details including squad and statistics."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "statorium-football.get-team"
+          with:
+            teamId: "tools.teamId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-football-player
+          description: "Get football player profile and statistics."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "statorium-football.get-player"
+          with:
+            playerId: "tools.playerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-basketball-games
+          description: "List basketball games filtered by league, date, or status."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "statorium-basketball.list-basketball-games"
+          with:
+            leagueId: "tools.leagueId"
+            date: "tools.date"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-basketball-game
+          description: "Get basketball game box score and quarter-by-quarter breakdown."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "statorium-basketball.get-basketball-game"
+          with:
+            gameId: "tools.gameId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-basketball-standings
+          description: "Get basketball league standings."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "statorium-basketball.get-basketball-standings"
+          with:
+            leagueId: "tools.leagueId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-nfl-games
+          description: "List NFL games filtered by week, season, team, or status."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "statorium-nfl.list-nfl-games"
+          with:
+            week: "tools.week"
+            season: "tools.season"
+            teamId: "tools.teamId"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-nfl-game
+          description: "Get NFL game details including quarter scores and team statistics."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "statorium-nfl.get-nfl-game"
+          with:
+            gameId: "tools.gameId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-nfl-standings
+          description: "Get NFL standings by conference and division."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "statorium-nfl.get-nfl-standings"
+          with:
+            season: "tools.season"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-nfl-news
+          description: "Get the latest NFL news linked to specific players or teams."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "statorium-nfl.list-nfl-news"
+          with:
+            teamId: "tools.teamId"
+            count: "tools.count"
+          outputParameters:
+            - type: object
+              mapping: "$."

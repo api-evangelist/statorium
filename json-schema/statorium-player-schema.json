@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/statorium/main/json-schema/statorium-player-schema.json",
+  "title": "Statorium Player",
+  "description": "Schema for a Statorium sports player including profile and career data.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for the player."
+    },
+    "name": {
+      "type": "string",
+      "description": "Player full name."
+    },
+    "nameTranslated": {
+      "type": ["string", "null"],
+      "description": "Translated player name if available."
+    },
+    "nationality": {
+      "type": ["string", "null"],
+      "description": "Player nationality."
+    },
+    "position": {
+      "type": ["string", "null"],
+      "description": "Player position."
+    },
+    "dateOfBirth": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Player date of birth."
+    },
+    "teamId": {
+      "type": ["integer", "null"],
+      "description": "Current team ID."
+    },
+    "shirtNumber": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "maximum": 99,
+      "description": "Player shirt number."
+    },
+    "height": {
+      "type": ["string", "null"],
+      "description": "Player height."
+    },
+    "weight": {
+      "type": ["string", "null"],
+      "description": "Player weight."
+    }
+  },
+  "required": ["id", "name"]
+}

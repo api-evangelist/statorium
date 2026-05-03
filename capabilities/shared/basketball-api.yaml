@@ -1,0 +1,169 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Statorium Basketball API"
+  description: "Statorium Basketball API providing live scores, game results, standings, and player statistics for NBA and other basketball leagues."
+  tags:
+    - Basketball
+    - NBA
+    - Sports Data
+    - Live Scores
+    - Statistics
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      STATORIUM_API_KEY: STATORIUM_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: statorium-basketball
+      baseUri: https://api.statorium.com/api/v1
+      description: "Statorium Basketball API for NBA and international basketball data."
+      authentication:
+        type: apikey
+        key: apikey
+        value: "{{STATORIUM_API_KEY}}"
+        placement: query
+      resources:
+        - name: basketball-leagues
+          path: /basketball/leagues/
+          description: "Basketball leagues."
+          operations:
+            - name: list-basketball-leagues
+              method: GET
+              description: "Returns all accessible basketball leagues."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: basketball-games
+          path: /basketball/games/
+          description: "Basketball games."
+          operations:
+            - name: list-basketball-games
+              method: GET
+              description: "Returns basketball games with filtering."
+              inputParameters:
+                - name: leagueId
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Filter by league ID."
+                - name: date
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by date."
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by status."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-basketball-game
+              method: GET
+              description: "Returns full game details including quarter scores and player stats."
+              inputParameters:
+                - name: gameId
+                  in: path
+                  type: integer
+                  required: true
+                  description: "Game identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: basketball-standings
+          path: /basketball/standings/
+          description: "Basketball standings."
+          operations:
+            - name: get-basketball-standings
+              method: GET
+              description: "Returns basketball league standings."
+              inputParameters:
+                - name: leagueId
+                  in: query
+                  type: integer
+                  required: true
+                  description: "League identifier."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: statorium-basketball-rest
+      resources:
+        - path: /v1/basketball/games
+          name: basketball-games
+          description: "Basketball game listings."
+          operations:
+            - method: GET
+              name: list-basketball-games
+              description: "List basketball games."
+              call: "statorium-basketball.list-basketball-games"
+              with:
+                leagueId: "rest.leagueId"
+                date: "rest.date"
+                status: "rest.status"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: statorium-basketball-mcp
+      transport: http
+      tools:
+        - name: list-basketball-games
+          description: "List basketball games filtered by league, date, or status."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "statorium-basketball.list-basketball-games"
+          with:
+            leagueId: "tools.leagueId"
+            date: "tools.date"
+            status: "tools.status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-basketball-game
+          description: "Get basketball game details including quarter scores and player stats."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "statorium-basketball.get-basketball-game"
+          with:
+            gameId: "tools.gameId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-basketball-standings
+          description: "Get basketball league standings."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "statorium-basketball.get-basketball-standings"
+          with:
+            leagueId: "tools.leagueId"
+          outputParameters:
+            - type: object
+              mapping: "$."

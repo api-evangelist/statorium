@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/statorium/main/json-schema/statorium-match-schema.json",
+  "title": "Statorium Match",
+  "description": "Schema for a Statorium sports match including scores, status, and team references.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for the match."
+    },
+    "homeTeam": {
+      "$ref": "#/$defs/TeamRef"
+    },
+    "awayTeam": {
+      "$ref": "#/$defs/TeamRef"
+    },
+    "homeScore": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Home team score."
+    },
+    "awayScore": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Away team score."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["live", "scheduled", "finished"],
+      "description": "Current match status."
+    },
+    "matchDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time of the match."
+    },
+    "leagueId": {
+      "type": "integer",
+      "description": "ID of the league this match belongs to."
+    },
+    "seasonId": {
+      "type": "integer",
+      "description": "ID of the season this match belongs to."
+    },
+    "minute": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Current match minute for live matches."
+    },
+    "venue": {
+      "type": ["string", "null"],
+      "description": "Name of the venue where the match is played."
+    },
+    "referee": {
+      "type": ["string", "null"],
+      "description": "Name of the match referee."
+    }
+  },
+  "required": ["id", "homeTeam", "awayTeam", "status", "matchDate"],
+  "$defs": {
+    "TeamRef": {
+      "type": "object",
+      "title": "Team Reference",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Team identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "Team name."
+        },
+        "nameTranslated": {
+          "type": ["string", "null"],
+          "description": "Translated team name if available."
+        }
+      },
+      "required": ["id", "name"]
+    }
+  }
+}

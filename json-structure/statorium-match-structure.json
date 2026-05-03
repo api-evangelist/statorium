@@ -1,0 +1,26 @@
+{
+  "name": "Match",
+  "description": "A sports match with score, status, and team information.",
+  "fields": [
+    { "name": "id", "type": "integer", "required": true, "description": "Unique match identifier." },
+    { "name": "homeTeam", "type": "TeamRef", "required": true, "description": "The home team." },
+    { "name": "awayTeam", "type": "TeamRef", "required": true, "description": "The away team." },
+    { "name": "homeScore", "type": "integer", "required": false, "description": "Home team score." },
+    { "name": "awayScore", "type": "integer", "required": false, "description": "Away team score." },
+    { "name": "status", "type": "string", "required": true, "enum": ["live", "scheduled", "finished"], "description": "Match status." },
+    { "name": "matchDate", "type": "date-time", "required": true, "description": "Match date and time." },
+    { "name": "leagueId", "type": "integer", "required": false, "description": "League identifier." },
+    { "name": "seasonId", "type": "integer", "required": false, "description": "Season identifier." },
+    { "name": "minute", "type": "integer", "required": false, "description": "Current match minute." }
+  ],
+  "nested": [
+    {
+      "name": "TeamRef",
+      "fields": [
+        { "name": "id", "type": "integer", "required": true },
+        { "name": "name", "type": "string", "required": true },
+        { "name": "nameTranslated", "type": "string", "required": false }
+      ]
+    }
+  ]
+}

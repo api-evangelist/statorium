@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/statorium/main/json-schema/statorium-team-schema.json",
+  "title": "Statorium Team",
+  "description": "Schema for a Statorium sports team including metadata and squad information.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier for the team."
+    },
+    "name": {
+      "type": "string",
+      "description": "Team name."
+    },
+    "nameTranslated": {
+      "type": ["string", "null"],
+      "description": "Translated team name."
+    },
+    "country": {
+      "type": ["string", "null"],
+      "description": "Country of the team."
+    },
+    "logoUrl": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "URL to the team logo image."
+    },
+    "founded": {
+      "type": ["integer", "null"],
+      "minimum": 1800,
+      "maximum": 2030,
+      "description": "Year the team was founded."
+    },
+    "stadium": {
+      "type": ["string", "null"],
+      "description": "Name of the team's home stadium."
+    },
+    "city": {
+      "type": ["string", "null"],
+      "description": "City where the team is based."
+    },
+    "conference": {
+      "type": ["string", "null"],
+      "description": "Conference the team belongs to."
+    },
+    "division": {
+      "type": ["string", "null"],
+      "description": "Division the team belongs to."
+    }
+  },
+  "required": ["id", "name"]
+}
