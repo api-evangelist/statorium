@@ -115,7 +115,7 @@ common:
     url: json-structure/statorium-match-structure.json
   - type: JSONStructure
     url: json-structure/statorium-team-structure.json
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/statorium-context.jsonld
   - type: SpectralRules
     url: rules/statorium-rules.yml
