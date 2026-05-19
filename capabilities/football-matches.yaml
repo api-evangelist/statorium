@@ -1,0 +1,147 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Statorium Football API — Matches
+  description: 'Statorium Football API — Matches. 2 operations. Lead operation: List Matches. Self-contained Naftiko capability
+    covering one Statorium business surface.'
+  tags:
+  - Statorium
+  - Matches
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STATORIUM_API_KEY: STATORIUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: football-matches
+    baseUri: https://api.statorium.com/api/v1
+    description: Statorium Football API — Matches business capability. Self-contained, no shared references.
+    resources:
+    - name: matches
+      path: /matches/
+      operations:
+      - name: listmatches
+        method: GET
+        description: List Matches
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: leagueId
+          in: query
+          type: integer
+          description: Filter matches by league ID.
+        - name: seasonId
+          in: query
+          type: integer
+          description: Filter matches by season ID.
+        - name: teamId
+          in: query
+          type: integer
+          description: Filter matches involving a specific team.
+        - name: date
+          in: query
+          type: string
+          description: Filter matches by date (YYYY-MM-DD).
+        - name: status
+          in: query
+          type: string
+          description: Filter matches by status.
+    - name: matches-matchId
+      path: /matches/{matchId}/
+      operations:
+      - name: getmatch
+        method: GET
+        description: Get Match by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: matchId
+          in: path
+          type: integer
+          description: The unique identifier of the match.
+          required: true
+    authentication:
+      type: apikey
+      key: apikey
+      value: '{{env.STATORIUM_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: football-matches-rest
+    port: 8080
+    description: REST adapter for Statorium Football API — Matches. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/matches
+      name: matches
+      description: REST surface for matches.
+      operations:
+      - method: GET
+        name: listmatches
+        description: List Matches
+        call: football-matches.listmatches
+        with:
+          leagueId: rest.leagueId
+          seasonId: rest.seasonId
+          teamId: rest.teamId
+          date: rest.date
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/matches/{matchid}
+      name: matches-matchid
+      description: REST surface for matches-matchId.
+      operations:
+      - method: GET
+        name: getmatch
+        description: Get Match by ID
+        call: football-matches.getmatch
+        with:
+          matchId: rest.matchId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: football-matches-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Statorium Football API — Matches. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-matches
+      description: List Matches
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: football-matches.listmatches
+      with:
+        leagueId: tools.leagueId
+        seasonId: tools.seasonId
+        teamId: tools.teamId
+        date: tools.date
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-match-id
+      description: Get Match by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: football-matches.getmatch
+      with:
+        matchId: tools.matchId
+      outputParameters:
+      - type: object
+        mapping: $.

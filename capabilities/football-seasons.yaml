@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Statorium Football API — Seasons
+  description: 'Statorium Football API — Seasons. 1 operations. Lead operation: List All Seasons. Self-contained Naftiko capability
+    covering one Statorium business surface.'
+  tags:
+  - Statorium
+  - Seasons
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STATORIUM_API_KEY: STATORIUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: football-seasons
+    baseUri: https://api.statorium.com/api/v1
+    description: Statorium Football API — Seasons business capability. Self-contained, no shared references.
+    resources:
+    - name: seasons
+      path: /seasons/
+      operations:
+      - name: listseasons
+        method: GET
+        description: List All Seasons
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: leagueId
+          in: query
+          type: integer
+          description: Filter seasons by league ID.
+    authentication:
+      type: apikey
+      key: apikey
+      value: '{{env.STATORIUM_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: football-seasons-rest
+    port: 8080
+    description: REST adapter for Statorium Football API — Seasons. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/seasons
+      name: seasons
+      description: REST surface for seasons.
+      operations:
+      - method: GET
+        name: listseasons
+        description: List All Seasons
+        call: football-seasons.listseasons
+        with:
+          leagueId: rest.leagueId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: football-seasons-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Statorium Football API — Seasons. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-all-seasons
+      description: List All Seasons
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: football-seasons.listseasons
+      with:
+        leagueId: tools.leagueId
+      outputParameters:
+      - type: object
+        mapping: $.

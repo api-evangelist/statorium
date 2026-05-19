@@ -1,0 +1,135 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Statorium Basketball API — Games
+  description: 'Statorium Basketball API — Games. 2 operations. Lead operation: List Basketball Games. Self-contained Naftiko
+    capability covering one Statorium business surface.'
+  tags:
+  - Statorium
+  - Games
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STATORIUM_API_KEY: STATORIUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: basketball-games
+    baseUri: https://api.statorium.com/api/v1
+    description: Statorium Basketball API — Games business capability. Self-contained, no shared references.
+    resources:
+    - name: basketball-games
+      path: /basketball/games/
+      operations:
+      - name: listbasketballgames
+        method: GET
+        description: List Basketball Games
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: leagueId
+          in: query
+          type: integer
+          description: Filter games by league ID.
+        - name: date
+          in: query
+          type: string
+          description: Filter games by date (YYYY-MM-DD).
+        - name: status
+          in: query
+          type: string
+          description: Filter games by status.
+    - name: basketball-games-gameId
+      path: /basketball/games/{gameId}/
+      operations:
+      - name: getbasketballgame
+        method: GET
+        description: Get Basketball Game
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: gameId
+          in: path
+          type: integer
+          description: The unique game identifier.
+          required: true
+    authentication:
+      type: apikey
+      key: apikey
+      value: '{{env.STATORIUM_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: basketball-games-rest
+    port: 8080
+    description: REST adapter for Statorium Basketball API — Games. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/basketball/games
+      name: basketball-games
+      description: REST surface for basketball-games.
+      operations:
+      - method: GET
+        name: listbasketballgames
+        description: List Basketball Games
+        call: basketball-games.listbasketballgames
+        with:
+          leagueId: rest.leagueId
+          date: rest.date
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/basketball/games/{gameid}
+      name: basketball-games-gameid
+      description: REST surface for basketball-games-gameId.
+      operations:
+      - method: GET
+        name: getbasketballgame
+        description: Get Basketball Game
+        call: basketball-games.getbasketballgame
+        with:
+          gameId: rest.gameId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: basketball-games-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Statorium Basketball API — Games. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-basketball-games
+      description: List Basketball Games
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: basketball-games.listbasketballgames
+      with:
+        leagueId: tools.leagueId
+        date: tools.date
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-basketball-game
+      description: Get Basketball Game
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: basketball-games.getbasketballgame
+      with:
+        gameId: tools.gameId
+      outputParameters:
+      - type: object
+        mapping: $.

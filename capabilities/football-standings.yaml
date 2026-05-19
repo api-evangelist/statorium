@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Statorium Football API — Standings
+  description: 'Statorium Football API — Standings. 1 operations. Lead operation: Get Standings. Self-contained Naftiko capability
+    covering one Statorium business surface.'
+  tags:
+  - Statorium
+  - Standings
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STATORIUM_API_KEY: STATORIUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: football-standings
+    baseUri: https://api.statorium.com/api/v1
+    description: Statorium Football API — Standings business capability. Self-contained, no shared references.
+    resources:
+    - name: standings
+      path: /standings/
+      operations:
+      - name: getstandings
+        method: GET
+        description: Get Standings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: leagueId
+          in: query
+          type: integer
+          description: The league ID for which to retrieve standings.
+          required: true
+        - name: seasonId
+          in: query
+          type: integer
+          description: The season ID (defaults to current season).
+    authentication:
+      type: apikey
+      key: apikey
+      value: '{{env.STATORIUM_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: football-standings-rest
+    port: 8080
+    description: REST adapter for Statorium Football API — Standings. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/standings
+      name: standings
+      description: REST surface for standings.
+      operations:
+      - method: GET
+        name: getstandings
+        description: Get Standings
+        call: football-standings.getstandings
+        with:
+          leagueId: rest.leagueId
+          seasonId: rest.seasonId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: football-standings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Statorium Football API — Standings. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-standings
+      description: Get Standings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: football-standings.getstandings
+      with:
+        leagueId: tools.leagueId
+        seasonId: tools.seasonId
+      outputParameters:
+      - type: object
+        mapping: $.

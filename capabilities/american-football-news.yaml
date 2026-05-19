@@ -1,0 +1,93 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Statorium American Football API — News
+  description: 'Statorium American Football API — News. 1 operations. Lead operation: List NFL News. Self-contained Naftiko
+    capability covering one Statorium business surface.'
+  tags:
+  - Statorium
+  - News
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STATORIUM_API_KEY: STATORIUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: american-football-news
+    baseUri: https://api.statorium.com/api/v1
+    description: Statorium American Football API — News business capability. Self-contained, no shared references.
+    resources:
+    - name: nfl-news
+      path: /nfl/news/
+      operations:
+      - name: listnflnews
+        method: GET
+        description: List NFL News
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: teamId
+          in: query
+          type: integer
+          description: Filter news by team ID.
+        - name: playerId
+          in: query
+          type: integer
+          description: Filter news by player ID.
+        - name: count
+          in: query
+          type: integer
+          description: Number of news items to return.
+    authentication:
+      type: apikey
+      key: apikey
+      value: '{{env.STATORIUM_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: american-football-news-rest
+    port: 8080
+    description: REST adapter for Statorium American Football API — News. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/nfl/news
+      name: nfl-news
+      description: REST surface for nfl-news.
+      operations:
+      - method: GET
+        name: listnflnews
+        description: List NFL News
+        call: american-football-news.listnflnews
+        with:
+          teamId: rest.teamId
+          playerId: rest.playerId
+          count: rest.count
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: american-football-news-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Statorium American Football API — News. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-nfl-news
+      description: List NFL News
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: american-football-news.listnflnews
+      with:
+        teamId: tools.teamId
+        playerId: tools.playerId
+        count: tools.count
+      outputParameters:
+      - type: object
+        mapping: $.

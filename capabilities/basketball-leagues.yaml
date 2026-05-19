@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Statorium Basketball API — Leagues
+  description: 'Statorium Basketball API — Leagues. 1 operations. Lead operation: List Basketball Leagues. Self-contained
+    Naftiko capability covering one Statorium business surface.'
+  tags:
+  - Statorium
+  - Leagues
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STATORIUM_API_KEY: STATORIUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: basketball-leagues
+    baseUri: https://api.statorium.com/api/v1
+    description: Statorium Basketball API — Leagues business capability. Self-contained, no shared references.
+    resources:
+    - name: basketball-leagues
+      path: /basketball/leagues/
+      operations:
+      - name: listbasketballleagues
+        method: GET
+        description: List Basketball Leagues
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: apikey
+      value: '{{env.STATORIUM_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: basketball-leagues-rest
+    port: 8080
+    description: REST adapter for Statorium Basketball API — Leagues. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/basketball/leagues
+      name: basketball-leagues
+      description: REST surface for basketball-leagues.
+      operations:
+      - method: GET
+        name: listbasketballleagues
+        description: List Basketball Leagues
+        call: basketball-leagues.listbasketballleagues
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: basketball-leagues-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Statorium Basketball API — Leagues. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-basketball-leagues
+      description: List Basketball Leagues
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: basketball-leagues.listbasketballleagues
+      outputParameters:
+      - type: object
+        mapping: $.

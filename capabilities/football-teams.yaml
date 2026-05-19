@@ -1,0 +1,129 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Statorium Football API — Teams
+  description: 'Statorium Football API — Teams. 2 operations. Lead operation: List Teams. Self-contained Naftiko capability
+    covering one Statorium business surface.'
+  tags:
+  - Statorium
+  - Teams
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STATORIUM_API_KEY: STATORIUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: football-teams
+    baseUri: https://api.statorium.com/api/v1
+    description: Statorium Football API — Teams business capability. Self-contained, no shared references.
+    resources:
+    - name: teams
+      path: /teams/
+      operations:
+      - name: listteams
+        method: GET
+        description: List Teams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: leagueId
+          in: query
+          type: integer
+          description: Filter teams by league ID.
+        - name: seasonId
+          in: query
+          type: integer
+          description: Filter teams by season ID.
+    - name: teams-teamId
+      path: /teams/{teamId}/
+      operations:
+      - name: getteam
+        method: GET
+        description: Get Team by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: teamId
+          in: path
+          type: integer
+          description: The unique identifier of the team.
+          required: true
+    authentication:
+      type: apikey
+      key: apikey
+      value: '{{env.STATORIUM_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: football-teams-rest
+    port: 8080
+    description: REST adapter for Statorium Football API — Teams. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/teams
+      name: teams
+      description: REST surface for teams.
+      operations:
+      - method: GET
+        name: listteams
+        description: List Teams
+        call: football-teams.listteams
+        with:
+          leagueId: rest.leagueId
+          seasonId: rest.seasonId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/teams/{teamid}
+      name: teams-teamid
+      description: REST surface for teams-teamId.
+      operations:
+      - method: GET
+        name: getteam
+        description: Get Team by ID
+        call: football-teams.getteam
+        with:
+          teamId: rest.teamId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: football-teams-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Statorium Football API — Teams. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-teams
+      description: List Teams
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: football-teams.listteams
+      with:
+        leagueId: tools.leagueId
+        seasonId: tools.seasonId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-team-id
+      description: Get Team by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: football-teams.getteam
+      with:
+        teamId: tools.teamId
+      outputParameters:
+      - type: object
+        mapping: $.

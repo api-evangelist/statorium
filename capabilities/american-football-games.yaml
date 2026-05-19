@@ -1,0 +1,141 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Statorium American Football API — Games
+  description: 'Statorium American Football API — Games. 2 operations. Lead operation: List NFL Games. Self-contained Naftiko
+    capability covering one Statorium business surface.'
+  tags:
+  - Statorium
+  - Games
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STATORIUM_API_KEY: STATORIUM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: american-football-games
+    baseUri: https://api.statorium.com/api/v1
+    description: Statorium American Football API — Games business capability. Self-contained, no shared references.
+    resources:
+    - name: nfl-games
+      path: /nfl/games/
+      operations:
+      - name: listnflgames
+        method: GET
+        description: List NFL Games
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: week
+          in: query
+          type: integer
+          description: NFL week number (1-22 including playoffs).
+        - name: season
+          in: query
+          type: integer
+          description: NFL season year (e.g., 2025).
+        - name: teamId
+          in: query
+          type: integer
+          description: Filter games involving a specific team.
+        - name: status
+          in: query
+          type: string
+          description: Filter games by status.
+    - name: nfl-games-gameId
+      path: /nfl/games/{gameId}/
+      operations:
+      - name: getnflgame
+        method: GET
+        description: Get NFL Game
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: gameId
+          in: path
+          type: integer
+          description: The unique game identifier.
+          required: true
+    authentication:
+      type: apikey
+      key: apikey
+      value: '{{env.STATORIUM_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: american-football-games-rest
+    port: 8080
+    description: REST adapter for Statorium American Football API — Games. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/nfl/games
+      name: nfl-games
+      description: REST surface for nfl-games.
+      operations:
+      - method: GET
+        name: listnflgames
+        description: List NFL Games
+        call: american-football-games.listnflgames
+        with:
+          week: rest.week
+          season: rest.season
+          teamId: rest.teamId
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nfl/games/{gameid}
+      name: nfl-games-gameid
+      description: REST surface for nfl-games-gameId.
+      operations:
+      - method: GET
+        name: getnflgame
+        description: Get NFL Game
+        call: american-football-games.getnflgame
+        with:
+          gameId: rest.gameId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: american-football-games-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Statorium American Football API — Games. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-nfl-games
+      description: List NFL Games
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: american-football-games.listnflgames
+      with:
+        week: tools.week
+        season: tools.season
+        teamId: tools.teamId
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-nfl-game
+      description: Get NFL Game
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: american-football-games.getnflgame
+      with:
+        gameId: tools.gameId
+      outputParameters:
+      - type: object
+        mapping: $.
