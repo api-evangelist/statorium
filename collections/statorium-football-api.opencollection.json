@@ -1,0 +1,321 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Statorium Football API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leagues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Leagues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/leagues/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              }
+            ]
+          },
+          "docs": "Returns all leagues the authenticated account has permission to access. Each league includes an ID, name, country, and optional logo URL."
+        },
+        {
+          "info": {
+            "name": "Get League by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/leagues/:leagueId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the league."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific league including name, country, current season, and logo URL."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Seasons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Seasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/seasons/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "query",
+                "description": "Filter seasons by league ID."
+              }
+            ]
+          },
+          "docs": "Returns all available seasons for the leagues accessible to the authenticated account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Matches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Matches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/matches/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "query",
+                "description": "Filter matches by league ID."
+              },
+              {
+                "name": "seasonId",
+                "value": "",
+                "type": "query",
+                "description": "Filter matches by season ID."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Filter matches involving a specific team."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filter matches by date (YYYY-MM-DD)."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter matches by status."
+              }
+            ]
+          },
+          "docs": "Returns matches filtered by league, season, team, or date. Supports live score updates, scheduled fixtures, and completed results."
+        },
+        {
+          "info": {
+            "name": "Get Match by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/matches/:matchId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "matchId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the match."
+              }
+            ]
+          },
+          "docs": "Retrieves full details for a specific match including score, lineups, events, statistics, and head-to-head history between the two teams."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/teams/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "query",
+                "description": "Filter teams by league ID."
+              },
+              {
+                "name": "seasonId",
+                "value": "",
+                "type": "query",
+                "description": "Filter teams by season ID."
+              }
+            ]
+          },
+          "docs": "Returns teams filtered by league or season. Includes team name, country, logo, and founding information."
+        },
+        {
+          "info": {
+            "name": "Get Team by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/teams/:teamId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the team."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific team including squad, statistics, and season data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Players",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Player by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/players/:playerId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the player."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific player including profile, career history, and season statistics."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Standings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Standings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/standings/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "query",
+                "description": "The league ID for which to retrieve standings."
+              },
+              {
+                "name": "seasonId",
+                "value": "",
+                "type": "query",
+                "description": "The season ID (defaults to current season)."
+              }
+            ]
+          },
+          "docs": "Retrieves league standings table for a specific league and season including team position, points, wins, draws, losses, goals for, goals against, and goal difference."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,269 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Statorium American Football API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Games",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List NFL Games",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/games/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "week",
+                "value": "",
+                "type": "query",
+                "description": "NFL week number (1-22 including playoffs)."
+              },
+              {
+                "name": "season",
+                "value": "",
+                "type": "query",
+                "description": "NFL season year (e.g., 2025)."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Filter games involving a specific team."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter games by status."
+              }
+            ]
+          },
+          "docs": "Returns NFL games filtered by week, season, team, or date with live scores, schedules, and completed results."
+        },
+        {
+          "info": {
+            "name": "Get NFL Game",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/games/:gameId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "gameId",
+                "value": "",
+                "type": "path",
+                "description": "The unique game identifier."
+              }
+            ]
+          },
+          "docs": "Returns full details for a specific NFL game including quarter scores, team statistics, and play summaries."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List NFL Teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/teams/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "conference",
+                "value": "",
+                "type": "query",
+                "description": "Filter teams by conference."
+              },
+              {
+                "name": "division",
+                "value": "",
+                "type": "query",
+                "description": "Filter teams by division."
+              }
+            ]
+          },
+          "docs": "Returns all 32 NFL teams with names, divisions, conference, and logo URLs."
+        },
+        {
+          "info": {
+            "name": "Get NFL Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/teams/:teamId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "The unique team identifier."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about an NFL team including roster, season record, and team metadata."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Players",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NFL Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/players/:playerId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique player identifier."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about an NFL player including profile, career stats, and current season statistics."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Standings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NFL Standings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/standings/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "season",
+                "value": "",
+                "type": "query",
+                "description": "Season year (defaults to current season)."
+              }
+            ]
+          },
+          "docs": "Returns AFC and NFC standings including division rankings, win/loss records, and tiebreaker information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "News",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List NFL News",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/news/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Filter news by team ID."
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "query",
+                "description": "Filter news by player ID."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of news items to return."
+              }
+            ]
+          },
+          "docs": "Returns the latest NFL news articles and updates linked to players and teams. Includes injuries, transactions, game previews, and analysis."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

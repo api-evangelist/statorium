@@ -1,0 +1,1431 @@
+{
+  "item": [
+    {
+      "id": "c6122437-3acd-4ffc-83de-65c6029b02b3",
+      "name": "Games",
+      "description": {
+        "content": "Access NFL game data including live scores, results, and schedules.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "abf11374-3604-4de1-a3e0-a38f7a801455",
+          "name": "List NFL Games",
+          "request": {
+            "name": "List NFL Games",
+            "description": {
+              "content": "Returns NFL games filtered by week, season, team, or date with live scores, schedules, and completed results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "games",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "week",
+                  "value": "<integer>",
+                  "description": "NFL week number (1-22 including playoffs)."
+                },
+                {
+                  "disabled": false,
+                  "key": "season",
+                  "value": "<integer>",
+                  "description": "NFL season year (e.g., 2025)."
+                },
+                {
+                  "disabled": false,
+                  "key": "teamId",
+                  "value": "<integer>",
+                  "description": "Filter games involving a specific team."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter games by status."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23d5907d-3d32-4e82-88fb-a958610b1ba2",
+              "name": "List of NFL games",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "games",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "week",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "season",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"games\": [\n    {\n      \"id\": 5322,\n      \"homeTeam\": {\n        \"id\": 227,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"awayTeam\": {\n        \"id\": 7383,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"homeScore\": 6088,\n      \"awayScore\": 1529,\n      \"status\": \"finished\",\n      \"gameDate\": \"1967-02-17T15:54:32.748Z\",\n      \"week\": 8874,\n      \"season\": 4460,\n      \"quarter\": \"string\",\n      \"timeRemaining\": \"string\"\n    },\n    {\n      \"id\": 2973,\n      \"homeTeam\": {\n        \"id\": 306,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"awayTeam\": {\n        \"id\": 7035,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"homeScore\": 7794,\n      \"awayScore\": 4942,\n      \"status\": \"live\",\n      \"gameDate\": \"2006-09-05T04:43:06.134Z\",\n      \"week\": 5098,\n      \"season\": 6033,\n      \"quarter\": \"string\",\n      \"timeRemaining\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaa38ff8-4659-4f0a-a6f6-9aabb25d8c8e",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "games",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "week",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "season",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7507c315-0fad-4c14-9201-8162bc2f9ce9",
+          "name": "Get NFL Game",
+          "request": {
+            "name": "Get NFL Game",
+            "description": {
+              "content": "Returns full details for a specific NFL game including quarter scores, team statistics, and play summaries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "games",
+                ":gameId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "gameId",
+                  "description": "(Required) The unique game identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "184c2558-59ef-4e80-b409-65ece100ca44",
+              "name": "NFL game details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5169,\n  \"homeTeam\": {\n    \"id\": 9106,\n    \"name\": \"string\",\n    \"abbreviation\": \"string\"\n  },\n  \"awayTeam\": {\n    \"id\": 970,\n    \"name\": \"string\",\n    \"abbreviation\": \"string\"\n  },\n  \"homeScore\": 6142,\n  \"awayScore\": 1580,\n  \"status\": \"finished\",\n  \"gameDate\": \"2021-06-04T21:12:06.617Z\",\n  \"week\": 8605,\n  \"season\": 194,\n  \"quarter\": \"string\",\n  \"timeRemaining\": \"string\",\n  \"quarterScores\": [\n    {\n      \"quarter\": \"string\",\n      \"homeScore\": 377,\n      \"awayScore\": 7729\n    },\n    {\n      \"quarter\": \"string\",\n      \"homeScore\": 6618,\n      \"awayScore\": 675\n    }\n  ],\n  \"teamStats\": {\n    \"home\": {\n      \"totalYards\": 1479,\n      \"rushingYards\": 2086,\n      \"passingYards\": 5354,\n      \"firstDowns\": 6100,\n      \"turnovers\": 8925,\n      \"penalties\": 632,\n      \"penaltyYards\": 8072,\n      \"timeOfPossession\": \"string\",\n      \"thirdDownConversions\": \"string\",\n      \"redZoneConversions\": \"string\"\n    },\n    \"away\": {\n      \"totalYards\": 1565,\n      \"rushingYards\": 5130,\n      \"passingYards\": 1294,\n      \"firstDowns\": 8638,\n      \"turnovers\": 202,\n      \"penalties\": 4992,\n      \"penaltyYards\": 743,\n      \"timeOfPossession\": \"string\",\n      \"thirdDownConversions\": \"string\",\n      \"redZoneConversions\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61b15df1-3be2-446f-a3a4-7b69eba2adf1",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "282377c0-8e28-4f2e-8a2e-e8c461a2cbe5",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1fc623d6-14d7-422c-ab4a-3ee6d528e371",
+      "name": "Teams",
+      "description": {
+        "content": "Retrieve NFL team information, rosters, and statistics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a252841-94ee-4461-a570-bb262098fa92",
+          "name": "List NFL Teams",
+          "request": {
+            "name": "List NFL Teams",
+            "description": {
+              "content": "Returns all 32 NFL teams with names, divisions, conference, and logo URLs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "teams",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "conference",
+                  "value": "<string>",
+                  "description": "Filter teams by conference."
+                },
+                {
+                  "disabled": false,
+                  "key": "division",
+                  "value": "<string>",
+                  "description": "Filter teams by division."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79c76d5b-385a-460f-a326-6440dbc4c3df",
+              "name": "List of NFL teams",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "teams",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "conference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "division",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"teams\": [\n    {\n      \"id\": 2299,\n      \"name\": \"string\",\n      \"city\": \"string\",\n      \"abbreviation\": \"string\",\n      \"conference\": \"NFC\",\n      \"division\": \"South\",\n      \"logoUrl\": \"http://EniYco.nfahkncbOhgucVS3tIfVW2f\",\n      \"stadium\": \"string\"\n    },\n    {\n      \"id\": 934,\n      \"name\": \"string\",\n      \"city\": \"string\",\n      \"abbreviation\": \"string\",\n      \"conference\": \"AFC\",\n      \"division\": \"East\",\n      \"logoUrl\": \"https://acltjdfQRaDJXUciVOmeuYANMjyTK.kigrebxLJmByLF6xRX0xn3Ms\",\n      \"stadium\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca55645a-d896-4c78-9e7b-ad3aa79fd3c2",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "teams",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "conference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "division",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4340b651-f91b-424b-b1a6-9a8f84e9469d",
+          "name": "Get NFL Team",
+          "request": {
+            "name": "Get NFL Team",
+            "description": {
+              "content": "Returns detailed information about an NFL team including roster, season record, and team metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "teams",
+                ":teamId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "teamId",
+                  "description": "(Required) The unique team identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f7ef52a-2423-4450-a33e-5808902af4c2",
+              "name": "NFL team details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "teams",
+                    ":teamId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "teamId",
+                      "description": "(Required) The unique team identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8184,\n  \"name\": \"string\",\n  \"city\": \"string\",\n  \"abbreviation\": \"string\",\n  \"conference\": \"AFC\",\n  \"division\": \"East\",\n  \"logoUrl\": \"http://avSTmrQIFPhSlSllMQNv.ndava8MX-oyy11FkFtZA8Sj8kpmumjYBqH4.6C.rbiBgaZjpzh0QFOITnjy9Qr\",\n  \"stadium\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0686df67-afd6-483e-958b-84ad3b3dbbe7",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "teams",
+                    ":teamId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "teamId",
+                      "description": "(Required) The unique team identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2f2baf2-b9a4-4715-bebe-2f111d2fd19e",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "teams",
+                    ":teamId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "teamId",
+                      "description": "(Required) The unique team identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "dc3d7f3c-c22d-415a-b9db-8f15c4e87b96",
+      "name": "Players",
+      "description": {
+        "content": "Access NFL player profiles, news, and statistics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c8883c5c-d404-4df2-878d-738067a2d472",
+          "name": "Get NFL Player",
+          "request": {
+            "name": "Get NFL Player",
+            "description": {
+              "content": "Returns detailed information about an NFL player including profile, career stats, and current season statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "players",
+                ":playerId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "playerId",
+                  "description": "(Required) The unique player identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90a27106-d7d3-4f68-b619-0120a7621bf0",
+              "name": "NFL player details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "players",
+                    ":playerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "playerId",
+                      "description": "(Required) The unique player identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5031,\n  \"name\": \"string\",\n  \"position\": \"string\",\n  \"teamId\": 3777,\n  \"jerseyNumber\": 6001,\n  \"college\": \"string\",\n  \"experience\": 8412,\n  \"status\": \"active\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11f12e08-970e-47c0-b34d-5a9e9ec0a9c3",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "players",
+                    ":playerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "playerId",
+                      "description": "(Required) The unique player identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e75f751-3257-4d10-8661-0aa20cb6c7e3",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "players",
+                    ":playerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "playerId",
+                      "description": "(Required) The unique player identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6f028521-468a-4ad5-abe0-d6f3830f642e",
+      "name": "Standings",
+      "description": {
+        "content": "Retrieve AFC and NFC standings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1444d299-40b4-49ff-a7b0-3b8d76926e77",
+          "name": "Get NFL Standings",
+          "request": {
+            "name": "Get NFL Standings",
+            "description": {
+              "content": "Returns AFC and NFC standings including division rankings, win/loss records, and tiebreaker information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "standings",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "season",
+                  "value": "<integer>",
+                  "description": "Season year (defaults to current season)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87306b33-da85-4d71-8bd5-cf54bb9b4905",
+              "name": "NFL standings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "standings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "season",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"standings\": [\n    {\n      \"position\": 2810,\n      \"team\": {\n        \"id\": 973,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"conference\": \"string\",\n      \"division\": \"string\",\n      \"wins\": 9108,\n      \"losses\": 5718,\n      \"ties\": 3240,\n      \"winPercentage\": 5826.722135601255,\n      \"pointsFor\": 8,\n      \"pointsAgainst\": 5022\n    },\n    {\n      \"position\": 7097,\n      \"team\": {\n        \"id\": 8365,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"conference\": \"string\",\n      \"division\": \"string\",\n      \"wins\": 2903,\n      \"losses\": 988,\n      \"ties\": 8895,\n      \"winPercentage\": 3171.8635202126643,\n      \"pointsFor\": 6902,\n      \"pointsAgainst\": 7001\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "122f8bba-024b-4ed7-a65d-46f180068a27",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "standings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "season",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0ca7d229-2e8f-4a16-baf1-12b3821b848c",
+      "name": "News",
+      "description": {
+        "content": "Access daily news feeds for NFL players and teams.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e8ebd76c-c305-42ba-ae94-0485c2ad9021",
+          "name": "List NFL News",
+          "request": {
+            "name": "List NFL News",
+            "description": {
+              "content": "Returns the latest NFL news articles and updates linked to players and teams. Includes injuries, transactions, game previews, and analysis.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "news",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "teamId",
+                  "value": "<integer>",
+                  "description": "Filter news by team ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "playerId",
+                  "value": "<integer>",
+                  "description": "Filter news by player ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "20",
+                  "description": "Number of news items to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1f1c881-70aa-40fb-b56a-a8e2562fa9b4",
+              "name": "List of NFL news articles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "news",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "playerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"news\": [\n    {\n      \"id\": 182,\n      \"headline\": \"string\",\n      \"body\": \"string\",\n      \"publishedAt\": \"1946-07-02T09:29:14.145Z\",\n      \"teamId\": 6042,\n      \"playerId\": 3948,\n      \"category\": \"recap\"\n    },\n    {\n      \"id\": 3791,\n      \"headline\": \"string\",\n      \"body\": \"string\",\n      \"publishedAt\": \"2007-11-30T02:45:16.885Z\",\n      \"teamId\": 1712,\n      \"playerId\": 8620,\n      \"category\": \"analysis\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10838a31-bf83-47b0-8641-6155497c20ca",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "news",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "playerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.statorium.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d920f07a-2951-4ec4-8cc2-e0283720aab8",
+    "name": "Statorium American Football API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.\n\nContact Support:\n Name: Statorium Support",
+      "type": "text/plain"
+    }
+  }
+}

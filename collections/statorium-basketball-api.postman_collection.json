@@ -1,0 +1,1211 @@
+{
+  "item": [
+    {
+      "id": "bdcec860-a177-477e-b88a-93d11a463364",
+      "name": "Games",
+      "description": {
+        "content": "Access basketball game data including live scores and results.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "af9d8df2-667a-4eff-a1b4-83106a5c69c3",
+          "name": "List Basketball Games",
+          "request": {
+            "name": "List Basketball Games",
+            "description": {
+              "content": "Returns basketball games filtered by league, season, team, or date. Includes live, scheduled, and completed games with scores.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "basketball",
+                "games",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "leagueId",
+                  "value": "<integer>",
+                  "description": "Filter games by league ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "Filter games by date (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter games by status."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4688c77-8bd1-4a92-83ee-cec7427edf14",
+              "name": "List of games",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "games",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"games\": [\n    {\n      \"id\": 8057,\n      \"homeTeam\": {\n        \"id\": 8404,\n        \"name\": \"string\"\n      },\n      \"awayTeam\": {\n        \"id\": 1867,\n        \"name\": \"string\"\n      },\n      \"homeScore\": 9162,\n      \"awayScore\": 6924,\n      \"status\": \"live\",\n      \"gameDate\": \"1986-03-21T13:57:27.217Z\",\n      \"quarter\": 7032,\n      \"timeRemaining\": \"string\"\n    },\n    {\n      \"id\": 2267,\n      \"homeTeam\": {\n        \"id\": 8567,\n        \"name\": \"string\"\n      },\n      \"awayTeam\": {\n        \"id\": 1981,\n        \"name\": \"string\"\n      },\n      \"homeScore\": 2844,\n      \"awayScore\": 8465,\n      \"status\": \"scheduled\",\n      \"gameDate\": \"1995-11-29T22:48:41.510Z\",\n      \"quarter\": 9040,\n      \"timeRemaining\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3685c23-ddf7-4e72-9842-b080ee0bd106",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "games",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "804ffd61-c443-49fa-8a85-d11ebf5c32bf",
+          "name": "Get Basketball Game",
+          "request": {
+            "name": "Get Basketball Game",
+            "description": {
+              "content": "Returns full details for a specific basketball game including quarter scores, box score statistics, and lineups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "basketball",
+                "games",
+                ":gameId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "gameId",
+                  "description": "(Required) The unique game identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42eb3887-bc58-40e1-87cb-0871b6f67b6f",
+              "name": "Game details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2672,\n  \"homeTeam\": {\n    \"id\": 4866,\n    \"name\": \"string\"\n  },\n  \"awayTeam\": {\n    \"id\": 1950,\n    \"name\": \"string\"\n  },\n  \"homeScore\": 9315,\n  \"awayScore\": 3325,\n  \"status\": \"scheduled\",\n  \"gameDate\": \"1958-04-18T00:25:58.946Z\",\n  \"quarter\": 6939,\n  \"timeRemaining\": \"string\",\n  \"quarterScores\": [\n    {\n      \"quarter\": 2483,\n      \"homeScore\": 5319,\n      \"awayScore\": 144\n    },\n    {\n      \"quarter\": 8244,\n      \"homeScore\": 1731,\n      \"awayScore\": 2566\n    }\n  ],\n  \"playerStats\": [\n    {\n      \"playerId\": 7999,\n      \"name\": \"string\",\n      \"teamId\": 8477,\n      \"points\": 1271,\n      \"rebounds\": 3434,\n      \"assists\": 495,\n      \"steals\": 672,\n      \"blocks\": 3508,\n      \"turnovers\": 6443,\n      \"minutesPlayed\": \"string\",\n      \"fieldGoalsMade\": 8786,\n      \"fieldGoalsAttempted\": 8433,\n      \"threePointersMade\": 9905,\n      \"threePointersAttempted\": 2243,\n      \"freeThrowsMade\": 5644,\n      \"freeThrowsAttempted\": 8905\n    },\n    {\n      \"playerId\": 5232,\n      \"name\": \"string\",\n      \"teamId\": 2951,\n      \"points\": 6478,\n      \"rebounds\": 5756,\n      \"assists\": 5127,\n      \"steals\": 4730,\n      \"blocks\": 9025,\n      \"turnovers\": 2731,\n      \"minutesPlayed\": \"string\",\n      \"fieldGoalsMade\": 1250,\n      \"fieldGoalsAttempted\": 8543,\n      \"threePointersMade\": 3964,\n      \"threePointersAttempted\": 9542,\n      \"freeThrowsMade\": 144,\n      \"freeThrowsAttempted\": 3716\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e6387dc-3e6a-4abd-b830-fa4c5d329589",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "643b8ce2-15a0-420f-80bf-4f9ef6d2fd20",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "73861e6d-90b2-404e-aabb-009ff00c67de",
+      "name": "Teams",
+      "description": {
+        "content": "Retrieve basketball team information and statistics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "492ba1bb-eacc-448a-b52b-43720edf08b8",
+          "name": "Get Basketball Team",
+          "request": {
+            "name": "Get Basketball Team",
+            "description": {
+              "content": "Returns detailed information about a basketball team including roster and season statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "basketball",
+                "teams",
+                ":teamId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "teamId",
+                  "description": "(Required) The unique team identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a22ed41-2fd4-4130-968f-ceb9424daeb1",
+              "name": "Team details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "teams",
+                    ":teamId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "teamId",
+                      "description": "(Required) The unique team identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 8663,\n  \"name\": \"string\",\n  \"city\": \"string\",\n  \"conference\": \"string\",\n  \"division\": \"string\",\n  \"logoUrl\": \"https://yFEzPEMVaqfKoTJeCMA.yedcP8.tE5cbaNfSBORWwnljC1wMWQpKvdcsBU1KkdKBQZLCUB9dhIRL-W\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dce1d706-9c79-44d2-8c5c-9d43fc433253",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "teams",
+                    ":teamId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "teamId",
+                      "description": "(Required) The unique team identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0dea1d3-0a2a-47ab-b961-63b0d6518424",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "teams",
+                    ":teamId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "teamId",
+                      "description": "(Required) The unique team identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5372395f-ceae-4162-851c-a55a113956dd",
+      "name": "Players",
+      "description": {
+        "content": "Access basketball player profiles and statistics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "909cce05-01cc-4a3c-9875-6c47ab124717",
+          "name": "Get Basketball Player",
+          "request": {
+            "name": "Get Basketball Player",
+            "description": {
+              "content": "Returns detailed information about a basketball player including profile and season statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "basketball",
+                "players",
+                ":playerId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "playerId",
+                  "description": "(Required) The unique player identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1e0e12a-9ea3-4ef9-a224-9e0ab7ec7e27",
+              "name": "Player details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "players",
+                    ":playerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "playerId",
+                      "description": "(Required) The unique player identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4241,\n  \"name\": \"string\",\n  \"position\": \"string\",\n  \"teamId\": 7835,\n  \"jerseyNumber\": 4206,\n  \"nationality\": \"string\",\n  \"height\": \"string\",\n  \"weight\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "963d552e-7760-4b8a-86cf-4abb9c33de4e",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "players",
+                    ":playerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "playerId",
+                      "description": "(Required) The unique player identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "569b56a7-7957-4bc2-bd66-0cd70cc6cd08",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "players",
+                    ":playerId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "playerId",
+                      "description": "(Required) The unique player identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f725e1f7-b064-467a-9781-aeb3226921cf",
+      "name": "Standings",
+      "description": {
+        "content": "Retrieve league standings and division rankings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "66faff93-bf91-40a5-b6cc-c9067dc869cd",
+          "name": "Get Basketball Standings",
+          "request": {
+            "name": "Get Basketball Standings",
+            "description": {
+              "content": "Returns standings for a basketball league including team win/loss records, points, and division/conference rankings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "basketball",
+                "standings",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "leagueId",
+                  "value": "<integer>",
+                  "description": "(Required) The league ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "021fe211-c436-45bb-8bcd-5636eb6ccd6d",
+              "name": "League standings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "standings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"standings\": [\n    {\n      \"position\": 6276,\n      \"team\": {\n        \"id\": 790,\n        \"name\": \"string\"\n      },\n      \"wins\": 9887,\n      \"losses\": 3866,\n      \"winPercentage\": 3020.5166763040515,\n      \"gamesBehind\": 690.4895028190539,\n      \"points\": 7721\n    },\n    {\n      \"position\": 3244,\n      \"team\": {\n        \"id\": 6522,\n        \"name\": \"string\"\n      },\n      \"wins\": 5799,\n      \"losses\": 95,\n      \"winPercentage\": 4416.862829550202,\n      \"gamesBehind\": 2752.014883990437,\n      \"points\": 9623\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "194a38c1-d26b-4bbc-a979-9bd6689b98a1",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "standings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "10d247c7-1a2a-4e13-aa33-8f5a60eab0ba",
+      "name": "Leagues",
+      "description": {
+        "content": "Access basketball league listings and metadata.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77d6cfa2-9b92-40c9-8f53-e13ae57fedcd",
+          "name": "List Basketball Leagues",
+          "request": {
+            "name": "List Basketball Leagues",
+            "description": {
+              "content": "Returns all basketball leagues and competitions accessible with the authenticated token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "basketball",
+                "leagues",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45216418-35fb-46e3-9bf3-d77825b08730",
+              "name": "List of basketball leagues",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "leagues",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"leagues\": [\n    {\n      \"id\": 4773,\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"logoUrl\": \"https://LRUM.duuer,1Gb6tDrad7BM13XnBzKl21IjxvXXOQE9cYPR\"\n    },\n    {\n      \"id\": 3483,\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"logoUrl\": \"http://PmGSCouZXLhknJBYOwKS.cxsltqT4vzDCQ8Sz1I8CKhHUm53EpOTZir6DEht.P-yWxxlDeTYrj-K52doy\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "589f7fa5-dbb3-4e3a-babe-915620d2f01a",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "leagues",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.statorium.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5a1db339-f131-4289-bc34-49a11437d454",
+    "name": "Statorium Basketball API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Statorium Basketball API provides live basketball data including NBA live scores, game results, standings, player statistics, and team information delivered in JSON format. The API covers major basketball leagues and competitions with real-time score updates, box scores, schedules, and player/team statistics.\n\nContact Support:\n Name: Statorium Support",
+      "type": "text/plain"
+    }
+  }
+}
