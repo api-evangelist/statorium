@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/statorium-american-football-api-openapi.yml, openapi/statorium-basketball-api-openapi.yml,
+  openapi/statorium-football-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: apikey
+  description: API token provided upon subscription purchase.
+  sources:
+  - openapi/statorium-american-football-api-openapi.yml
+  - openapi/statorium-basketball-api-openapi.yml
+  - openapi/statorium-football-api-openapi.yml

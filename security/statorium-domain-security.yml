@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: statorium.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  1 05:29:32 2026 GMT
+  hsts: false
+- host: api.statorium.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 29 11:48:40 2026 GMT
+  hsts: false
+domains:
+- domain: statorium.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false

@@ -91,6 +91,10 @@ apis:
       - FN: Statorium Support
         url: https://statorium.com/
 common:
+  - type: DomainSecurity
+    url: security/statorium-domain-security.yml
+  - type: Authentication
+    url: authentication/statorium-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/statorium2
   - type: Website
