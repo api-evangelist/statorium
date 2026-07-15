@@ -91,6 +91,8 @@ apis:
       - FN: Statorium Support
         url: https://statorium.com/
 common:
+  - type: AgenticAccess
+    url: agentic-access/statorium-agentic-access.yml
   - type: DomainSecurity
     url: security/statorium-domain-security.yml
   - type: Authentication
