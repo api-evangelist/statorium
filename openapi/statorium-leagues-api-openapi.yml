@@ -1,0 +1,178 @@
+openapi: 3.1.0
+info:
+  title: Statorium American Football Games Leagues API
+  description: The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.
+  version: 1.0.0
+  contact:
+    name: Statorium Support
+    url: https://statorium.com/
+  termsOfService: https://statorium.com/
+servers:
+- url: https://api.statorium.com/api/v1
+  description: Statorium API Server
+security:
+- apiKey: []
+tags:
+- name: Leagues
+  description: Access basketball league listings and metadata.
+paths:
+  /basketball/leagues/:
+    get:
+      operationId: listBasketballLeagues
+      summary: List Basketball Leagues
+      description: Returns all basketball leagues and competitions accessible with the authenticated token.
+      tags:
+      - Leagues
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam'
+      responses:
+        '200':
+          description: List of basketball leagues
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  leagues:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/League'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /leagues/:
+    get:
+      operationId: listLeagues
+      summary: List All Leagues
+      description: Returns all leagues the authenticated account has permission to access. Each league includes an ID, name, country, and optional logo URL.
+      tags:
+      - Leagues
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam_2'
+      responses:
+        '200':
+          description: List of accessible leagues
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  leagues:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/League_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+  /leagues/{leagueId}/:
+    get:
+      operationId: getLeague
+      summary: Get League by ID
+      description: Retrieves detailed information about a specific league including name, country, current season, and logo URL.
+      tags:
+      - Leagues
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam_2'
+      - name: leagueId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: The unique identifier of the league.
+      responses:
+        '200':
+          description: League details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/League_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    ApiKeyParam_2:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message indicating the resource was not found.
+    Unauthorized_2:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message describing the authentication failure.
+  schemas:
+    League_2:
+      type: object
+      description: A football league or competition.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the league.
+        name:
+          type: string
+          description: Name of the league.
+        country:
+          type: string
+          description: Country the league is associated with.
+        logoUrl:
+          type: string
+          format: uri
+          description: URL to the league logo image.
+        currentSeasonId:
+          type: integer
+          description: ID of the currently active season.
+    League:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        country:
+          type: string
+        logoUrl:
+          type: string
+          format: uri
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
+      description: API token provided upon subscription purchase.
+externalDocs:
+  description: Statorium API Documentation
+  url: https://statorium.com/stats-api-documentation

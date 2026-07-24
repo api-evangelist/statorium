@@ -1,0 +1,259 @@
+openapi: 3.1.0
+info:
+  title: Statorium American Football Games Standings API
+  description: The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.
+  version: 1.0.0
+  contact:
+    name: Statorium Support
+    url: https://statorium.com/
+  termsOfService: https://statorium.com/
+servers:
+- url: https://api.statorium.com/api/v1
+  description: Statorium API Server
+security:
+- apiKey: []
+tags:
+- name: Standings
+  description: Retrieve AFC and NFC standings.
+paths:
+  /nfl/standings/:
+    get:
+      operationId: getNflStandings
+      summary: Get NFL Standings
+      description: Returns AFC and NFC standings including division rankings, win/loss records, and tiebreaker information.
+      tags:
+      - Standings
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam'
+      - name: season
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Season year (defaults to current season).
+      responses:
+        '200':
+          description: NFL standings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  standings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StandingEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /basketball/standings/:
+    get:
+      operationId: getBasketballStandings
+      summary: Get Basketball Standings
+      description: Returns standings for a basketball league including team win/loss records, points, and division/conference rankings.
+      tags:
+      - Standings
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam'
+      - name: leagueId
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: The league ID.
+      responses:
+        '200':
+          description: League standings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  standings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StandingEntry_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /standings/:
+    get:
+      operationId: getStandings
+      summary: Get Standings
+      description: Retrieves league standings table for a specific league and season including team position, points, wins, draws, losses, goals for, goals against, and goal difference.
+      tags:
+      - Standings
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam_2'
+      - name: leagueId
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: The league ID for which to retrieve standings.
+      - name: seasonId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The season ID (defaults to current season).
+      responses:
+        '200':
+          description: League standings table
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  standings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StandingEntry_3'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+components:
+  parameters:
+    ApiKeyParam_2:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    Unauthorized_2:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message describing the authentication failure.
+  schemas:
+    StandingEntry_2:
+      type: object
+      properties:
+        position:
+          type: integer
+        team:
+          $ref: '#/components/schemas/TeamRef_2'
+        wins:
+          type: integer
+        losses:
+          type: integer
+        winPercentage:
+          type: number
+        gamesBehind:
+          type: number
+        points:
+          type: integer
+    StandingEntry:
+      type: object
+      properties:
+        position:
+          type: integer
+        team:
+          $ref: '#/components/schemas/TeamRef'
+        conference:
+          type: string
+        division:
+          type: string
+        wins:
+          type: integer
+        losses:
+          type: integer
+        ties:
+          type: integer
+        winPercentage:
+          type: number
+        pointsFor:
+          type: integer
+        pointsAgainst:
+          type: integer
+    TeamRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        abbreviation:
+          type: string
+    TeamRef_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    TeamRef_3:
+      type: object
+      description: A lightweight team reference.
+      properties:
+        id:
+          type: integer
+          description: Team identifier.
+        name:
+          type: string
+          description: Team name.
+        nameTranslated:
+          type: string
+          description: Translated team name if available.
+    StandingEntry_3:
+      type: object
+      description: A team's position in the league standings.
+      properties:
+        position:
+          type: integer
+          description: Current position in the table.
+        team:
+          $ref: '#/components/schemas/TeamRef_3'
+        played:
+          type: integer
+          description: Matches played.
+        won:
+          type: integer
+          description: Matches won.
+        drawn:
+          type: integer
+          description: Matches drawn.
+        lost:
+          type: integer
+          description: Matches lost.
+        goalsFor:
+          type: integer
+          description: Goals scored.
+        goalsAgainst:
+          type: integer
+          description: Goals conceded.
+        goalDifference:
+          type: integer
+          description: Goal difference (goalsFor - goalsAgainst).
+        points:
+          type: integer
+          description: Total points.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
+      description: API token provided upon subscription purchase.
+externalDocs:
+  description: Statorium API Documentation
+  url: https://statorium.com/stats-api-documentation

@@ -1,0 +1,327 @@
+openapi: 3.1.0
+info:
+  title: Statorium American Football Games Teams API
+  description: The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.
+  version: 1.0.0
+  contact:
+    name: Statorium Support
+    url: https://statorium.com/
+  termsOfService: https://statorium.com/
+servers:
+- url: https://api.statorium.com/api/v1
+  description: Statorium API Server
+security:
+- apiKey: []
+tags:
+- name: Teams
+  description: Retrieve NFL team information, rosters, and statistics.
+paths:
+  /nfl/teams/:
+    get:
+      operationId: listNflTeams
+      summary: List NFL Teams
+      description: Returns all 32 NFL teams with names, divisions, conference, and logo URLs.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam'
+      - name: conference
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - AFC
+          - NFC
+        description: Filter teams by conference.
+      - name: division
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - East
+          - West
+          - North
+          - South
+        description: Filter teams by division.
+      responses:
+        '200':
+          description: List of NFL teams
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teams:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Team'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /nfl/teams/{teamId}/:
+    get:
+      operationId: getNflTeam
+      summary: Get NFL Team
+      description: Returns detailed information about an NFL team including roster, season record, and team metadata.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam'
+      - name: teamId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: The unique team identifier.
+      responses:
+        '200':
+          description: NFL team details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /basketball/teams/{teamId}/:
+    get:
+      operationId: getBasketballTeam
+      summary: Get Basketball Team
+      description: Returns detailed information about a basketball team including roster and season statistics.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam'
+      - name: teamId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: The unique team identifier.
+      responses:
+        '200':
+          description: Team details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /teams/:
+    get:
+      operationId: listTeams
+      summary: List Teams
+      description: Returns teams filtered by league or season. Includes team name, country, logo, and founding information.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam_2'
+      - name: leagueId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Filter teams by league ID.
+      - name: seasonId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Filter teams by season ID.
+      responses:
+        '200':
+          description: List of teams
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teams:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Team_3'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+  /teams/{teamId}/:
+    get:
+      operationId: getTeam
+      summary: Get Team by ID
+      description: Retrieves detailed information about a specific team including squad, statistics, and season data.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam_2'
+      - name: teamId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: The unique identifier of the team.
+      responses:
+        '200':
+          description: Team details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team_3'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+        '404':
+          $ref: '#/components/responses/NotFound_2'
+components:
+  parameters:
+    ApiKeyParam_2:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound_2:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message indicating the resource was not found.
+    Unauthorized_2:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message describing the authentication failure.
+  schemas:
+    PlayerRef:
+      type: object
+      description: A lightweight player reference.
+      properties:
+        id:
+          type: integer
+          description: Player identifier.
+        name:
+          type: string
+          description: Player name.
+        position:
+          type: string
+          description: Player position.
+    Team_3:
+      type: object
+      description: A football team with full details.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the team.
+        name:
+          type: string
+          description: Team name.
+        nameTranslated:
+          type: string
+          description: Translated team name.
+        country:
+          type: string
+          description: Country of the team.
+        logoUrl:
+          type: string
+          format: uri
+          description: URL to the team logo.
+        founded:
+          type: integer
+          description: Year the team was founded.
+        stadium:
+          type: string
+          description: Name of the team's home stadium.
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayerRef'
+          description: Current squad players.
+    Team_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        city:
+          type: string
+        conference:
+          type: string
+        division:
+          type: string
+        logoUrl:
+          type: string
+          format: uri
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        city:
+          type: string
+        abbreviation:
+          type: string
+        conference:
+          type: string
+          enum:
+          - AFC
+          - NFC
+        division:
+          type: string
+          enum:
+          - East
+          - West
+          - North
+          - South
+        logoUrl:
+          type: string
+          format: uri
+        stadium:
+          type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
+      description: API token provided upon subscription purchase.
+externalDocs:
+  description: Statorium API Documentation
+  url: https://statorium.com/stats-api-documentation

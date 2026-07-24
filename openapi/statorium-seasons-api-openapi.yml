@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Statorium American Football Games Seasons API
+  description: The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.
+  version: 1.0.0
+  contact:
+    name: Statorium Support
+    url: https://statorium.com/
+  termsOfService: https://statorium.com/
+servers:
+- url: https://api.statorium.com/api/v1
+  description: Statorium API Server
+security:
+- apiKey: []
+tags:
+- name: Seasons
+  description: Retrieve season information, current and historical seasons for specific leagues.
+paths:
+  /seasons/:
+    get:
+      operationId: listSeasons
+      summary: List All Seasons
+      description: Returns all available seasons for the leagues accessible to the authenticated account.
+      tags:
+      - Seasons
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam'
+      - name: leagueId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Filter seasons by league ID.
+      responses:
+        '200':
+          description: List of seasons
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  seasons:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Season'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message describing the authentication failure.
+  schemas:
+    Season:
+      type: object
+      description: A league season.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the season.
+        leagueId:
+          type: integer
+          description: ID of the parent league.
+        name:
+          type: string
+          description: Season name (e.g., 2025/2026).
+        startDate:
+          type: string
+          format: date
+          description: Season start date.
+        endDate:
+          type: string
+          format: date
+          description: Season end date.
+        isCurrent:
+          type: boolean
+          description: Whether this is the current active season.
+  parameters:
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
+      description: API token provided upon subscription purchase.
+externalDocs:
+  description: Statorium API Documentation
+  url: https://statorium.com/stats-api-documentation

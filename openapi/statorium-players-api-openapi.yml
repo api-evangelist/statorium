@@ -1,0 +1,234 @@
+openapi: 3.1.0
+info:
+  title: Statorium American Football Games Players API
+  description: The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.
+  version: 1.0.0
+  contact:
+    name: Statorium Support
+    url: https://statorium.com/
+  termsOfService: https://statorium.com/
+servers:
+- url: https://api.statorium.com/api/v1
+  description: Statorium API Server
+security:
+- apiKey: []
+tags:
+- name: Players
+  description: Access NFL player profiles, news, and statistics.
+paths:
+  /nfl/players/{playerId}/:
+    get:
+      operationId: getNflPlayer
+      summary: Get NFL Player
+      description: Returns detailed information about an NFL player including profile, career stats, and current season statistics.
+      tags:
+      - Players
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam'
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: The unique player identifier.
+      responses:
+        '200':
+          description: NFL player details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /basketball/players/{playerId}/:
+    get:
+      operationId: getBasketballPlayer
+      summary: Get Basketball Player
+      description: Returns detailed information about a basketball player including profile and season statistics.
+      tags:
+      - Players
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam'
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: The unique player identifier.
+      responses:
+        '200':
+          description: Player details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /players/{playerId}/:
+    get:
+      operationId: getPlayer
+      summary: Get Player by ID
+      description: Retrieves detailed information about a specific player including profile, career history, and season statistics.
+      tags:
+      - Players
+      parameters:
+      - $ref: '#/components/parameters/ApiKeyParam_2'
+      - name: playerId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: The unique identifier of the player.
+      responses:
+        '200':
+          description: Player details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player_3'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+        '404':
+          $ref: '#/components/responses/NotFound_2'
+components:
+  parameters:
+    ApiKeyParam_2:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound_2:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message indicating the resource was not found.
+    Unauthorized_2:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message describing the authentication failure.
+  schemas:
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        position:
+          type: string
+        teamId:
+          type: integer
+        jerseyNumber:
+          type: integer
+        college:
+          type: string
+        experience:
+          type: integer
+          description: Years of NFL experience.
+        status:
+          type: string
+          enum:
+          - active
+          - injured
+          - practice_squad
+          - free_agent
+    Player_3:
+      type: object
+      description: A football player with full details.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the player.
+        name:
+          type: string
+          description: Player name.
+        nameTranslated:
+          type: string
+          description: Translated player name if available.
+        nationality:
+          type: string
+          description: Player nationality.
+        position:
+          type: string
+          description: Player position (e.g., Forward, Midfielder).
+        dateOfBirth:
+          type: string
+          format: date
+          description: Player date of birth.
+        teamId:
+          type: integer
+          description: Current team ID.
+        shirtNumber:
+          type: integer
+          description: Player shirt number.
+    Player_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        position:
+          type: string
+        teamId:
+          type: integer
+        jerseyNumber:
+          type: integer
+        nationality:
+          type: string
+        height:
+          type: string
+        weight:
+          type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: query
+      name: apikey
+      description: API token provided upon subscription purchase.
+externalDocs:
+  description: Statorium API Documentation
+  url: https://statorium.com/stats-api-documentation
