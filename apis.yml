@@ -6,9 +6,22 @@ description: >-
   responses covering over 200 football leagues, NBA, NFL, and other major competitions with full coverage of live data,
   historical data, player stats, team stats, lineups, and predictions.
 type: Index
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Enterprise (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/statorium.png
 tags:
   - Sports
   - Sports Data
@@ -23,73 +36,103 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/statorium/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: statorium:football-api
-    name: Statorium Football API
-    description: >-
-      The Statorium Football API delivers comprehensive football/soccer data including live scores, match results,
-      standings, fixtures, lineups, player and team statistics for over 200 football leagues worldwide including the
-      English Premier League, Champions League, World Cup, and Major League Soccer. The API uses JSON format with
-      token-based authentication and supports head-to-head data, translated names, and league logos.
-    humanURL: https://statorium.com/football-api
-    baseURL: https://api.statorium.com/api/v1
-    tags:
-      - Football
-      - Soccer
-      - Live Scores
-      - Sports Data
-      - Statistics
-    properties:
-      - type: Documentation
-        url: https://statorium.com/stats-api-documentation
-      - type: OpenAPI
-        url: openapi/statorium-football-api-openapi.yml
-    contact:
-      - FN: Statorium Support
-        url: https://statorium.com/
-  - aid: statorium:basketball-api
-    name: Statorium Basketball API
-    description: >-
-      The Statorium Basketball API provides live basketball data including NBA live scores, game results, standings,
-      player statistics, and team information delivered in JSON format. The API covers major basketball leagues and
-      competitions with real-time updates.
-    humanURL: https://statorium.com/basketball-api
-    baseURL: https://api.statorium.com/api/v1
-    tags:
-      - Basketball
-      - NBA
-      - Live Scores
-      - Sports Data
-      - Statistics
-    properties:
-      - type: Documentation
-        url: https://statorium.com/stats-api-documentation
-      - type: OpenAPI
-        url: openapi/statorium-basketball-api-openapi.yml
-    contact:
-      - FN: Statorium Support
-        url: https://statorium.com/
-  - aid: statorium:american-football-api
-    name: Statorium American Football API
-    description: >-
-      The Statorium American Football API provides NFL data including live game data, scores, schedules, player news,
-      team statistics, and historical records. The API delivers unique daily news feeds linked to NFL players and teams
-      in JSON format.
-    humanURL: https://statorium.com/american-football-nfl-api
-    baseURL: https://api.statorium.com/api/v1
-    tags:
-      - American Football
-      - NFL
-      - Live Scores
-      - Sports Data
-      - Statistics
-    properties:
-      - type: Documentation
-        url: https://statorium.com/stats-api-documentation
-      - type: OpenAPI
-        url: openapi/statorium-american-football-api-openapi.yml
-    contact:
-      - FN: Statorium Support
-        url: https://statorium.com/
+- aid: statorium:statorium-games-api
+  name: Statorium Games API
+  description: Access NFL game data including live scores, results, and schedules.
+  humanURL: https://statorium.com/football-api
+  baseURL: https://api.statorium.com/api/v1
+  tags:
+  - Games
+  properties:
+  - type: OpenAPI
+    url: openapi/statorium-games-api-openapi.yml
+  - type: Documentation
+    url: https://statorium.com/stats-api-documentation
+- aid: statorium:statorium-leagues-api
+  name: Statorium Leagues API
+  description: Access basketball league listings and metadata.
+  humanURL: https://statorium.com/football-api
+  baseURL: https://api.statorium.com/api/v1
+  tags:
+  - Leagues
+  properties:
+  - type: OpenAPI
+    url: openapi/statorium-leagues-api-openapi.yml
+  - type: Documentation
+    url: https://statorium.com/stats-api-documentation
+- aid: statorium:statorium-matches-api
+  name: Statorium Matches API
+  description: >-
+    Access match data including live scores, results, schedules, lineups, and head-to-head information.
+  humanURL: https://statorium.com/football-api
+  baseURL: https://api.statorium.com/api/v1
+  tags:
+  - Matches
+  properties:
+  - type: OpenAPI
+    url: openapi/statorium-matches-api-openapi.yml
+  - type: Documentation
+    url: https://statorium.com/stats-api-documentation
+- aid: statorium:statorium-news-api
+  name: Statorium News API
+  description: Access daily news feeds for NFL players and teams.
+  humanURL: https://statorium.com/football-api
+  baseURL: https://api.statorium.com/api/v1
+  tags:
+  - News
+  properties:
+  - type: OpenAPI
+    url: openapi/statorium-news-api-openapi.yml
+  - type: Documentation
+    url: https://statorium.com/stats-api-documentation
+- aid: statorium:statorium-players-api
+  name: Statorium Players API
+  description: Access NFL player profiles, news, and statistics.
+  humanURL: https://statorium.com/football-api
+  baseURL: https://api.statorium.com/api/v1
+  tags:
+  - Players
+  properties:
+  - type: OpenAPI
+    url: openapi/statorium-players-api-openapi.yml
+  - type: Documentation
+    url: https://statorium.com/stats-api-documentation
+- aid: statorium:statorium-seasons-api
+  name: Statorium Seasons API
+  description: Retrieve season information, current and historical seasons for specific leagues.
+  humanURL: https://statorium.com/football-api
+  baseURL: https://api.statorium.com/api/v1
+  tags:
+  - Seasons
+  properties:
+  - type: OpenAPI
+    url: openapi/statorium-seasons-api-openapi.yml
+  - type: Documentation
+    url: https://statorium.com/stats-api-documentation
+- aid: statorium:statorium-standings-api
+  name: Statorium Standings API
+  description: Retrieve AFC and NFC standings.
+  humanURL: https://statorium.com/football-api
+  baseURL: https://api.statorium.com/api/v1
+  tags:
+  - Standings
+  properties:
+  - type: OpenAPI
+    url: openapi/statorium-standings-api-openapi.yml
+  - type: Documentation
+    url: https://statorium.com/stats-api-documentation
+- aid: statorium:statorium-teams-api
+  name: Statorium Teams API
+  description: Retrieve NFL team information, rosters, and statistics.
+  humanURL: https://statorium.com/football-api
+  baseURL: https://api.statorium.com/api/v1
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/statorium-teams-api-openapi.yml
+  - type: Documentation
+    url: https://statorium.com/stats-api-documentation
 common:
   - type: AgenticAccess
     url: agentic-access/statorium-agentic-access.yml
