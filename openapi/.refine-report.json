@@ -1,0 +1,28 @@
+{
+  "provider": "statorium",
+  "sources": [
+    "statorium-games-api-openapi.yml",
+    "statorium-leagues-api-openapi.yml",
+    "statorium-matches-api-openapi.yml",
+    "statorium-news-api-openapi.yml",
+    "statorium-players-api-openapi.yml",
+    "statorium-seasons-api-openapi.yml",
+    "statorium-standings-api-openapi.yml",
+    "statorium-teams-api-openapi.yml"
+  ],
+  "outputs": [
+    "statorium-games-api-openapi.yml",
+    "statorium-leagues-api-openapi.yml",
+    "statorium-matches-api-openapi.yml",
+    "statorium-news-api-openapi.yml",
+    "statorium-players-api-openapi.yml",
+    "statorium-seasons-api-openapi.yml",
+    "statorium-standings-api-openapi.yml",
+    "statorium-teams-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
