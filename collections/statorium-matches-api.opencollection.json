@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Statorium American Football Games Matches API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Matches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Matches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/matches/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "query",
+                "description": "Filter matches by league ID."
+              },
+              {
+                "name": "seasonId",
+                "value": "",
+                "type": "query",
+                "description": "Filter matches by season ID."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Filter matches involving a specific team."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filter matches by date (YYYY-MM-DD)."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter matches by status."
+              }
+            ]
+          },
+          "docs": "Returns matches filtered by league, season, team, or date. Supports live score updates, scheduled fixtures, and completed results."
+        },
+        {
+          "info": {
+            "name": "Get Match by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/matches/:matchId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "matchId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the match."
+              }
+            ]
+          },
+          "docs": "Retrieves full details for a specific match including score, lineups, events, statistics, and head-to-head history between the two teams."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

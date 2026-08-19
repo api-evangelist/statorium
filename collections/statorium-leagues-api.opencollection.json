@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Statorium American Football Games Leagues API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leagues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Basketball Leagues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/basketball/leagues/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              }
+            ]
+          },
+          "docs": "Returns all basketball leagues and competitions accessible with the authenticated token."
+        },
+        {
+          "info": {
+            "name": "List All Leagues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/leagues/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              }
+            ]
+          },
+          "docs": "Returns all leagues the authenticated account has permission to access. Each league includes an ID, name, country, and optional logo URL."
+        },
+        {
+          "info": {
+            "name": "Get League by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/leagues/:leagueId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the league."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific league including name, country, current season, and logo URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

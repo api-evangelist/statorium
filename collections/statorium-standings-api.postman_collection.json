@@ -1,0 +1,510 @@
+{
+  "item": [
+    {
+      "id": "a3b32836-0f69-4c20-9ca5-2c145a2703cf",
+      "name": "Standings",
+      "description": {
+        "content": "Retrieve AFC and NFC standings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "08611f89-e288-4bdc-936d-983a29ec5ca6",
+          "name": "Get NFL Standings",
+          "request": {
+            "name": "Get NFL Standings",
+            "description": {
+              "content": "Returns AFC and NFC standings including division rankings, win/loss records, and tiebreaker information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "standings",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "season",
+                  "value": "<integer>",
+                  "description": "Season year (defaults to current season)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec5d16f5-52de-4822-aac3-75de0d08fae7",
+              "name": "NFL standings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "standings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "season",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"standings\": [\n    {\n      \"position\": 2298,\n      \"team\": {\n        \"id\": 6680,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"conference\": \"string\",\n      \"division\": \"string\",\n      \"wins\": 4713,\n      \"losses\": 752,\n      \"ties\": 9038,\n      \"winPercentage\": 2885.7770010203676,\n      \"pointsFor\": 9721,\n      \"pointsAgainst\": 2626\n    },\n    {\n      \"position\": 9070,\n      \"team\": {\n        \"id\": 2409,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"conference\": \"string\",\n      \"division\": \"string\",\n      \"wins\": 1102,\n      \"losses\": 8751,\n      \"ties\": 9676,\n      \"winPercentage\": 7599.110338112874,\n      \"pointsFor\": 2691,\n      \"pointsAgainst\": 8909\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aabb8891-0310-498f-bcdd-d3dc3fa26654",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "standings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "season",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b943dd1-c95e-476c-9f94-123b81b56ec8",
+          "name": "Get Basketball Standings",
+          "request": {
+            "name": "Get Basketball Standings",
+            "description": {
+              "content": "Returns standings for a basketball league including team win/loss records, points, and division/conference rankings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "basketball",
+                "standings",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "leagueId",
+                  "value": "<integer>",
+                  "description": "(Required) The league ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f742de91-c3a5-40b6-a2f8-f9c35c6cda9b",
+              "name": "League standings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "standings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"standings\": [\n    {\n      \"position\": 8705,\n      \"team\": {\n        \"id\": 5224,\n        \"name\": \"string\"\n      },\n      \"wins\": 2975,\n      \"losses\": 5222,\n      \"winPercentage\": 4847.577946165969,\n      \"gamesBehind\": 9758.726605922613,\n      \"points\": 7099\n    },\n    {\n      \"position\": 6577,\n      \"team\": {\n        \"id\": 6876,\n        \"name\": \"string\"\n      },\n      \"wins\": 1831,\n      \"losses\": 4157,\n      \"winPercentage\": 2682.1559185394904,\n      \"gamesBehind\": 8719.561552567031,\n      \"points\": 5367\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30c6c758-c671-4438-ad3b-e3b6a1e5ee22",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "standings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b79a9090-4b7c-4d30-b37a-457e7e1265f8",
+          "name": "Get Standings",
+          "request": {
+            "name": "Get Standings",
+            "description": {
+              "content": "Retrieves league standings table for a specific league and season including team position, points, wins, draws, losses, goals for, goals against, and goal difference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "standings",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token for authentication."
+                },
+                {
+                  "disabled": false,
+                  "key": "leagueId",
+                  "value": "<integer>",
+                  "description": "(Required) The league ID for which to retrieve standings."
+                },
+                {
+                  "disabled": false,
+                  "key": "seasonId",
+                  "value": "<integer>",
+                  "description": "The season ID (defaults to current season)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa65c30d-078b-4c50-84c5-8391507c6853",
+              "name": "League standings table",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "standings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "seasonId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"standings\": [\n    {\n      \"position\": 9517,\n      \"team\": {\n        \"id\": 278,\n        \"name\": \"string\",\n        \"nameTranslated\": \"string\"\n      },\n      \"played\": 6510,\n      \"won\": 3974,\n      \"drawn\": 4297,\n      \"lost\": 6619,\n      \"goalsFor\": 4254,\n      \"goalsAgainst\": 1866,\n      \"goalDifference\": 6793,\n      \"points\": 37\n    },\n    {\n      \"position\": 1111,\n      \"team\": {\n        \"id\": 1437,\n        \"name\": \"string\",\n        \"nameTranslated\": \"string\"\n      },\n      \"played\": 8014,\n      \"won\": 9916,\n      \"drawn\": 8743,\n      \"lost\": 640,\n      \"goalsFor\": 3488,\n      \"goalsAgainst\": 6291,\n      \"goalDifference\": 7455,\n      \"points\": 793\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db8685ab-ec2c-4463-8f03-2e3b76a09f08",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "standings",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "seasonId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.statorium.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7f67aad4-c997-4027-9635-18a0af8dd715",
+    "name": "Statorium American Football Games Standings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.\n\nContact Support:\n Name: Statorium Support",
+      "type": "text/plain"
+    }
+  }
+}

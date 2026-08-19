@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Statorium American Football Games Players API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Players",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NFL Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/players/:playerId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique player identifier."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about an NFL player including profile, career stats, and current season statistics."
+        },
+        {
+          "info": {
+            "name": "Get Basketball Player",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/basketball/players/:playerId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique player identifier."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a basketball player including profile and season statistics."
+        },
+        {
+          "info": {
+            "name": "Get Player by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/players/:playerId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the player."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific player including profile, career history, and season statistics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

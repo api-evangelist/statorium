@@ -1,0 +1,227 @@
+{
+  "item": [
+    {
+      "id": "6e7d133d-6d30-4370-b89d-151dc9184817",
+      "name": "News",
+      "description": {
+        "content": "Access daily news feeds for NFL players and teams.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "04f3e187-293a-42c8-b340-e1423703347b",
+          "name": "List NFL News",
+          "request": {
+            "name": "List NFL News",
+            "description": {
+              "content": "Returns the latest NFL news articles and updates linked to players and teams. Includes injuries, transactions, game previews, and analysis.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "news",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "teamId",
+                  "value": "<integer>",
+                  "description": "Filter news by team ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "playerId",
+                  "value": "<integer>",
+                  "description": "Filter news by player ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "20",
+                  "description": "Number of news items to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1821a5ed-6876-4788-99af-08332883e541",
+              "name": "List of NFL news articles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "news",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "playerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"news\": [\n    {\n      \"id\": 4929,\n      \"headline\": \"string\",\n      \"body\": \"string\",\n      \"publishedAt\": \"1970-12-19T23:55:42.292Z\",\n      \"teamId\": 1465,\n      \"playerId\": 848,\n      \"category\": \"recap\"\n    },\n    {\n      \"id\": 7865,\n      \"headline\": \"string\",\n      \"body\": \"string\",\n      \"publishedAt\": \"1955-02-17T14:32:59.044Z\",\n      \"teamId\": 2232,\n      \"playerId\": 6304,\n      \"category\": \"recap\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6bd8b0e-e8ab-46c2-a86e-4f2b1708e3fc",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "news",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "playerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.statorium.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "964bb60e-d44a-40e7-8ba1-d76024c03c4b",
+    "name": "Statorium American Football Games News API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.\n\nContact Support:\n Name: Statorium Support",
+      "type": "text/plain"
+    }
+  }
+}

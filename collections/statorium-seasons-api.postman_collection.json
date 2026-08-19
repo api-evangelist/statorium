@@ -1,0 +1,196 @@
+{
+  "item": [
+    {
+      "id": "38fe4b0c-a907-4b56-950c-eb4c454bb3f0",
+      "name": "Seasons",
+      "description": {
+        "content": "Retrieve season information, current and historical seasons for specific leagues.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2df19ca2-45e0-4155-a5ed-e86cc4b926e3",
+          "name": "List All Seasons",
+          "request": {
+            "name": "List All Seasons",
+            "description": {
+              "content": "Returns all available seasons for the leagues accessible to the authenticated account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "seasons",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token for authentication."
+                },
+                {
+                  "disabled": false,
+                  "key": "leagueId",
+                  "value": "<integer>",
+                  "description": "Filter seasons by league ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05d99d47-16b2-4906-b22c-bb2ea78a8987",
+              "name": "List of seasons",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "seasons",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"seasons\": [\n    {\n      \"id\": 221,\n      \"leagueId\": 6305,\n      \"name\": \"string\",\n      \"startDate\": \"1957-06-22\",\n      \"endDate\": \"1966-10-26\",\n      \"isCurrent\": true\n    },\n    {\n      \"id\": 2497,\n      \"leagueId\": 3723,\n      \"name\": \"string\",\n      \"startDate\": \"2021-01-13\",\n      \"endDate\": \"2008-09-04\",\n      \"isCurrent\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da7e0637-0984-40b3-a809-5a7cc0b4a46b",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "seasons",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.statorium.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3d57151c-7c84-4687-b93d-e98fd2448ed3",
+    "name": "Statorium American Football Games Seasons API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.\n\nContact Support:\n Name: Statorium Support",
+      "type": "text/plain"
+    }
+  }
+}

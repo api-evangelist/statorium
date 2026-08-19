@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Statorium American Football Games Teams API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List NFL Teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/teams/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "conference",
+                "value": "",
+                "type": "query",
+                "description": "Filter teams by conference."
+              },
+              {
+                "name": "division",
+                "value": "",
+                "type": "query",
+                "description": "Filter teams by division."
+              }
+            ]
+          },
+          "docs": "Returns all 32 NFL teams with names, divisions, conference, and logo URLs."
+        },
+        {
+          "info": {
+            "name": "Get NFL Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/teams/:teamId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "The unique team identifier."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about an NFL team including roster, season record, and team metadata."
+        },
+        {
+          "info": {
+            "name": "Get Basketball Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/basketball/teams/:teamId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "The unique team identifier."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a basketball team including roster and season statistics."
+        },
+        {
+          "info": {
+            "name": "List Teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/teams/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "query",
+                "description": "Filter teams by league ID."
+              },
+              {
+                "name": "seasonId",
+                "value": "",
+                "type": "query",
+                "description": "Filter teams by season ID."
+              }
+            ]
+          },
+          "docs": "Returns teams filtered by league or season. Includes team name, country, logo, and founding information."
+        },
+        {
+          "info": {
+            "name": "Get Team by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/teams/:teamId/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the team."
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific team including squad, statistics, and season data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

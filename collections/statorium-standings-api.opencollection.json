@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Statorium American Football Games Standings API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Standings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NFL Standings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/standings/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "season",
+                "value": "",
+                "type": "query",
+                "description": "Season year (defaults to current season)."
+              }
+            ]
+          },
+          "docs": "Returns AFC and NFC standings including division rankings, win/loss records, and tiebreaker information."
+        },
+        {
+          "info": {
+            "name": "Get Basketball Standings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/basketball/standings/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "query",
+                "description": "The league ID."
+              }
+            ]
+          },
+          "docs": "Returns standings for a basketball league including team win/loss records, points, and division/conference rankings."
+        },
+        {
+          "info": {
+            "name": "Get Standings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/standings/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token for authentication."
+              },
+              {
+                "name": "leagueId",
+                "value": "",
+                "type": "query",
+                "description": "The league ID for which to retrieve standings."
+              },
+              {
+                "name": "seasonId",
+                "value": "",
+                "type": "query",
+                "description": "The season ID (defaults to current season)."
+              }
+            ]
+          },
+          "docs": "Retrieves league standings table for a specific league and season including team position, points, wins, draws, losses, goals for, goals against, and goal difference."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

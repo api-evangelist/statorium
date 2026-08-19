@@ -1,0 +1,855 @@
+{
+  "item": [
+    {
+      "id": "eb0420d3-4c79-48ca-939d-1bc9d8961bd5",
+      "name": "Games",
+      "description": {
+        "content": "Access NFL game data including live scores, results, and schedules.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "064febfc-1a89-4298-b599-f0b4851f9f5f",
+          "name": "List NFL Games",
+          "request": {
+            "name": "List NFL Games",
+            "description": {
+              "content": "Returns NFL games filtered by week, season, team, or date with live scores, schedules, and completed results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "games",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "week",
+                  "value": "<integer>",
+                  "description": "NFL week number (1-22 including playoffs)."
+                },
+                {
+                  "disabled": false,
+                  "key": "season",
+                  "value": "<integer>",
+                  "description": "NFL season year (e.g., 2025)."
+                },
+                {
+                  "disabled": false,
+                  "key": "teamId",
+                  "value": "<integer>",
+                  "description": "Filter games involving a specific team."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter games by status."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76df5e5e-5109-4e2b-b224-0db99a9fc224",
+              "name": "List of NFL games",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "games",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "week",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "season",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"games\": [\n    {\n      \"id\": 3535,\n      \"homeTeam\": {\n        \"id\": 3371,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"awayTeam\": {\n        \"id\": 3241,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"homeScore\": 4802,\n      \"awayScore\": 907,\n      \"status\": \"live\",\n      \"gameDate\": \"2017-02-24T06:44:32.526Z\",\n      \"week\": 299,\n      \"season\": 2222,\n      \"quarter\": \"string\",\n      \"timeRemaining\": \"string\"\n    },\n    {\n      \"id\": 957,\n      \"homeTeam\": {\n        \"id\": 9609,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"awayTeam\": {\n        \"id\": 4808,\n        \"name\": \"string\",\n        \"abbreviation\": \"string\"\n      },\n      \"homeScore\": 5671,\n      \"awayScore\": 8970,\n      \"status\": \"scheduled\",\n      \"gameDate\": \"1977-09-19T18:34:43.412Z\",\n      \"week\": 9180,\n      \"season\": 9771,\n      \"quarter\": \"string\",\n      \"timeRemaining\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07e06785-d2cc-4f88-9071-f6f09bd7cb02",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "games",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "week",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "season",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c03b547-5aff-4e0f-a2d6-e4eccb5dcd6e",
+          "name": "Get NFL Game",
+          "request": {
+            "name": "Get NFL Game",
+            "description": {
+              "content": "Returns full details for a specific NFL game including quarter scores, team statistics, and play summaries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nfl",
+                "games",
+                ":gameId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "gameId",
+                  "description": "(Required) The unique game identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "99d295a5-baec-4806-8979-5f9bc2463e85",
+              "name": "NFL game details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5607,\n  \"homeTeam\": {\n    \"id\": 6585,\n    \"name\": \"string\",\n    \"abbreviation\": \"string\"\n  },\n  \"awayTeam\": {\n    \"id\": 1411,\n    \"name\": \"string\",\n    \"abbreviation\": \"string\"\n  },\n  \"homeScore\": 937,\n  \"awayScore\": 8390,\n  \"status\": \"live\",\n  \"gameDate\": \"1967-11-01T18:42:13.171Z\",\n  \"week\": 1572,\n  \"season\": 3315,\n  \"quarter\": \"string\",\n  \"timeRemaining\": \"string\",\n  \"quarterScores\": [\n    {\n      \"quarter\": \"string\",\n      \"homeScore\": 1220,\n      \"awayScore\": 2662\n    },\n    {\n      \"quarter\": \"string\",\n      \"homeScore\": 7625,\n      \"awayScore\": 1253\n    }\n  ],\n  \"teamStats\": {\n    \"home\": {\n      \"totalYards\": 7367,\n      \"rushingYards\": 2967,\n      \"passingYards\": 5377,\n      \"firstDowns\": 7929,\n      \"turnovers\": 7099,\n      \"penalties\": 9059,\n      \"penaltyYards\": 6647,\n      \"timeOfPossession\": \"string\",\n      \"thirdDownConversions\": \"string\",\n      \"redZoneConversions\": \"string\"\n    },\n    \"away\": {\n      \"totalYards\": 6353,\n      \"rushingYards\": 499,\n      \"passingYards\": 9515,\n      \"firstDowns\": 1497,\n      \"turnovers\": 5766,\n      \"penalties\": 3729,\n      \"penaltyYards\": 1992,\n      \"timeOfPossession\": \"string\",\n      \"thirdDownConversions\": \"string\",\n      \"redZoneConversions\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "522ff2ad-1dcd-440a-a898-9dab77266a50",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49b6c130-be5e-4f13-b151-c6666d70f884",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nfl",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6ef7fb0-cb78-4c92-8f2d-d2a0937c7038",
+          "name": "List Basketball Games",
+          "request": {
+            "name": "List Basketball Games",
+            "description": {
+              "content": "Returns basketball games filtered by league, season, team, or date. Includes live, scheduled, and completed games with scores.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "basketball",
+                "games",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                },
+                {
+                  "disabled": false,
+                  "key": "leagueId",
+                  "value": "<integer>",
+                  "description": "Filter games by league ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "Filter games by date (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter games by status."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4464907-3d8d-4641-a71b-97a6587474ee",
+              "name": "List of games",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "games",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"games\": [\n    {\n      \"id\": 6645,\n      \"homeTeam\": {\n        \"id\": 8751,\n        \"name\": \"string\"\n      },\n      \"awayTeam\": {\n        \"id\": 5856,\n        \"name\": \"string\"\n      },\n      \"homeScore\": 6424,\n      \"awayScore\": 2387,\n      \"status\": \"live\",\n      \"gameDate\": \"2011-08-07T12:05:06.913Z\",\n      \"quarter\": 7453,\n      \"timeRemaining\": \"string\"\n    },\n    {\n      \"id\": 9437,\n      \"homeTeam\": {\n        \"id\": 5584,\n        \"name\": \"string\"\n      },\n      \"awayTeam\": {\n        \"id\": 4946,\n        \"name\": \"string\"\n      },\n      \"homeScore\": 8646,\n      \"awayScore\": 2656,\n      \"status\": \"finished\",\n      \"gameDate\": \"1982-10-02T21:09:08.098Z\",\n      \"quarter\": 7930,\n      \"timeRemaining\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9a34dc3-606a-42f5-8ad0-4028b2d546f9",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "games",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leagueId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7e7bdc7-23c0-41cc-a39e-91314f2d0bff",
+          "name": "Get Basketball Game",
+          "request": {
+            "name": "Get Basketball Game",
+            "description": {
+              "content": "Returns full details for a specific basketball game including quarter scores, box score statistics, and lineups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "basketball",
+                "games",
+                ":gameId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "gameId",
+                  "description": "(Required) The unique game identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63be08d4-a4d4-4ae5-b8a1-7de7c34dacb9",
+              "name": "Game details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 6947,\n  \"homeTeam\": {\n    \"id\": 1787,\n    \"name\": \"string\"\n  },\n  \"awayTeam\": {\n    \"id\": 7192,\n    \"name\": \"string\"\n  },\n  \"homeScore\": 4463,\n  \"awayScore\": 1210,\n  \"status\": \"scheduled\",\n  \"gameDate\": \"2001-11-30T19:28:50.823Z\",\n  \"quarter\": 2492,\n  \"timeRemaining\": \"string\",\n  \"quarterScores\": [\n    {\n      \"quarter\": 8248,\n      \"homeScore\": 4401,\n      \"awayScore\": 2700\n    },\n    {\n      \"quarter\": 7929,\n      \"homeScore\": 3254,\n      \"awayScore\": 7241\n    }\n  ],\n  \"playerStats\": [\n    {\n      \"playerId\": 5035,\n      \"name\": \"string\",\n      \"teamId\": 4166,\n      \"points\": 4831,\n      \"rebounds\": 759,\n      \"assists\": 8466,\n      \"steals\": 355,\n      \"blocks\": 6443,\n      \"turnovers\": 128,\n      \"minutesPlayed\": \"string\",\n      \"fieldGoalsMade\": 2227,\n      \"fieldGoalsAttempted\": 2864,\n      \"threePointersMade\": 4401,\n      \"threePointersAttempted\": 2761,\n      \"freeThrowsMade\": 9978,\n      \"freeThrowsAttempted\": 4689\n    },\n    {\n      \"playerId\": 8251,\n      \"name\": \"string\",\n      \"teamId\": 8726,\n      \"points\": 2880,\n      \"rebounds\": 159,\n      \"assists\": 3500,\n      \"steals\": 563,\n      \"blocks\": 1840,\n      \"turnovers\": 678,\n      \"minutesPlayed\": \"string\",\n      \"fieldGoalsMade\": 6158,\n      \"fieldGoalsAttempted\": 9721,\n      \"threePointersMade\": 9963,\n      \"threePointersAttempted\": 3224,\n      \"freeThrowsMade\": 7086,\n      \"freeThrowsAttempted\": 6900\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efab90f3-6b53-4342-9678-20d028d52d65",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d87fb59-8d02-4701-ad8d-c92e97584589",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "games",
+                    ":gameId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "gameId",
+                      "description": "(Required) The unique game identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.statorium.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2e2aaddf-db98-4915-b675-caa5ad7af5e2",
+    "name": "Statorium American Football Games API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.\n\nContact Support:\n Name: Statorium Support",
+      "type": "text/plain"
+    }
+  }
+}

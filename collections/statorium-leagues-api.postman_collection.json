@@ -1,0 +1,532 @@
+{
+  "item": [
+    {
+      "id": "6e7ca261-25d3-4b32-89a4-0e3de9fc4f81",
+      "name": "Leagues",
+      "description": {
+        "content": "Access basketball league listings and metadata.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e89fa629-302a-4355-8b82-87313e9dcdb0",
+          "name": "List Basketball Leagues",
+          "request": {
+            "name": "List Basketball Leagues",
+            "description": {
+              "content": "Returns all basketball leagues and competitions accessible with the authenticated token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "basketball",
+                "leagues",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "712a2e6a-673f-45b2-86b4-790f16b040ac",
+              "name": "List of basketball leagues",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "leagues",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"leagues\": [\n    {\n      \"id\": 3557,\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"logoUrl\": \"http://sHYUqCykPKXLmCvIVDMGlqzlkyMWhpRwy.ftgN7y8D.IfgI0ucZbsXihg\"\n    },\n    {\n      \"id\": 1614,\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"logoUrl\": \"http://kOeUVkqcxkgxUqNHfCBzupqfi.zlgE25veB6a1Pr.NlSJum90PVBPPKyvogAUyBHBwBocJ09WanV62yEWjMaGS1WXS\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bd06b79-ab7f-48b0-90d2-0c6bc06e7a31",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "basketball",
+                    "leagues",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e92bc191-7451-4228-973d-9b84c7c9a787",
+          "name": "List All Leagues",
+          "request": {
+            "name": "List All Leagues",
+            "description": {
+              "content": "Returns all leagues the authenticated account has permission to access. Each league includes an ID, name, country, and optional logo URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "leagues",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token for authentication."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c19134e9-d346-4995-992f-33232f9f612a",
+              "name": "List of accessible leagues",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leagues",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"leagues\": [\n    {\n      \"id\": 1313,\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"logoUrl\": \"https://tfUoSPiXrWbeHdH.lkvwGaYbM7wVboQJRSKTLhy+YaO+P1eFHndtgkfH\",\n      \"currentSeasonId\": 2622\n    },\n    {\n      \"id\": 788,\n      \"name\": \"string\",\n      \"country\": \"string\",\n      \"logoUrl\": \"https://aypUMXSUKF.ocq4XfJHEssrnAaWn7JGhGZwqAYBIkp8QO47XJVVFDb2oQQrsGeBUxgr\",\n      \"currentSeasonId\": 49\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26b7899b-cc53-41b8-9802-bb52a37db634",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leagues",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3978c31-36cb-4ea9-95d1-4add69fb7e34",
+          "name": "Get League by ID",
+          "request": {
+            "name": "Get League by ID",
+            "description": {
+              "content": "Retrieves detailed information about a specific league including name, country, current season, and logo URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "leagues",
+                ":leagueId",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apikey",
+                  "value": "<string>",
+                  "description": "(Required) Your Statorium API token for authentication."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "leagueId",
+                  "description": "(Required) The unique identifier of the league."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ad6a976-4772-463e-9603-df82d245ed58",
+              "name": "League details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leagues",
+                    ":leagueId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "leagueId",
+                      "description": "(Required) The unique identifier of the league."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1328,\n  \"name\": \"string\",\n  \"country\": \"string\",\n  \"logoUrl\": \"http://GJfIgYcHlrRwJxgejBOvagTYRlNTSZo.jwszNqFrKINoNb3pq,4B4N-2aCDIGJAHUGhxmnfnKQ\",\n  \"currentSeasonId\": 633\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c97990f-0ac5-40ae-80f9-39a8216702da",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leagues",
+                    ":leagueId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "leagueId",
+                      "description": "(Required) The unique identifier of the league."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e17b173-1b13-4ff6-a207-c525aa2f8544",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "leagues",
+                    ":leagueId",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apikey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apikey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "leagueId",
+                      "description": "(Required) The unique identifier of the league."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.statorium.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apikey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f28c7bed-b2b5-476f-8e95-fb15e39df9ea",
+    "name": "Statorium American Football Games Leagues API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.\n\nContact Support:\n Name: Statorium Support",
+      "type": "text/plain"
+    }
+  }
+}

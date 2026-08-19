@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Statorium American Football Games News API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apikey",
+      "value": "{{apikey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "News",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List NFL News",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statorium.com/api/v1/nfl/news/",
+            "params": [
+              {
+                "name": "apikey",
+                "value": "",
+                "type": "query",
+                "description": "Your Statorium API token."
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "query",
+                "description": "Filter news by team ID."
+              },
+              {
+                "name": "playerId",
+                "value": "",
+                "type": "query",
+                "description": "Filter news by player ID."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of news items to return."
+              }
+            ]
+          },
+          "docs": "Returns the latest NFL news articles and updates linked to players and teams. Includes injuries, transactions, game previews, and analysis."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
