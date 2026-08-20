@@ -127,6 +127,8 @@ apis:
   humanURL: https://statorium.com/football-api
   baseURL: https://api.statorium.com/api/v1
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
