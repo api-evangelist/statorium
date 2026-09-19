@@ -66,6 +66,8 @@ apis:
   humanURL: https://statorium.com/football-api
   baseURL: https://api.statorium.com/api/v1
   tags:
+  - League
+  tags_raw:
   - Leagues
   properties:
   - type: OpenAPI
@@ -103,6 +105,8 @@ apis:
   humanURL: https://statorium.com/football-api
   baseURL: https://api.statorium.com/api/v1
   tags:
+  - Player
+  tags_raw:
   - Players
   properties:
   - type: OpenAPI
