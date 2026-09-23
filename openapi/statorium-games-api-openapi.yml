@@ -1,12 +1,12 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Statorium American Football Games API
-  description: The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.
+  title: Statorium Games API
   version: 1.0.0
   contact:
     name: Statorium Support
     url: https://statorium.com/
   termsOfService: https://statorium.com/
+  description: 'Operations tagged Games across 2 of this provider''s published API definitions: statorium-american-football-api-openapi.yml, statorium-basketball-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.statorium.com/api/v1
   description: Statorium API Server
@@ -69,6 +69,9 @@ paths:
                       $ref: '#/components/schemas/Game'
         '401':
           $ref: '#/components/responses/Unauthorized'
+    servers:
+    - url: https://api.statorium.com/api/v1
+      description: Statorium API Server
   /nfl/games/{gameId}/:
     get:
       operationId: getNflGame
@@ -95,6 +98,9 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+    servers:
+    - url: https://api.statorium.com/api/v1
+      description: Statorium API Server
   /basketball/games/:
     get:
       operationId: listBasketballGames
@@ -141,6 +147,9 @@ paths:
                       $ref: '#/components/schemas/Game_2'
         '401':
           $ref: '#/components/responses/Unauthorized'
+    servers:
+    - url: https://api.statorium.com/api/v1
+      description: Statorium API Server
   /basketball/games/{gameId}/:
     get:
       operationId: getBasketballGame
@@ -167,96 +176,11 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+    servers:
+    - url: https://api.statorium.com/api/v1
+      description: Statorium API Server
 components:
   schemas:
-    PlayerGameStats:
-      type: object
-      description: Player statistics for a single game.
-      properties:
-        playerId:
-          type: integer
-        name:
-          type: string
-        teamId:
-          type: integer
-        points:
-          type: integer
-        rebounds:
-          type: integer
-        assists:
-          type: integer
-        steals:
-          type: integer
-        blocks:
-          type: integer
-        turnovers:
-          type: integer
-        minutesPlayed:
-          type: string
-        fieldGoalsMade:
-          type: integer
-        fieldGoalsAttempted:
-          type: integer
-        threePointersMade:
-          type: integer
-        threePointersAttempted:
-          type: integer
-        freeThrowsMade:
-          type: integer
-        freeThrowsAttempted:
-          type: integer
-    GameDetail:
-      allOf:
-      - $ref: '#/components/schemas/Game'
-      - type: object
-        properties:
-          quarterScores:
-            type: array
-            items:
-              type: object
-              properties:
-                quarter:
-                  type: string
-                homeScore:
-                  type: integer
-                awayScore:
-                  type: integer
-          teamStats:
-            type: object
-            properties:
-              home:
-                $ref: '#/components/schemas/TeamGameStats'
-              away:
-                $ref: '#/components/schemas/TeamGameStats'
-    Game_2:
-      type: object
-      description: A basketball game with score and status.
-      properties:
-        id:
-          type: integer
-        homeTeam:
-          $ref: '#/components/schemas/TeamRef_2'
-        awayTeam:
-          $ref: '#/components/schemas/TeamRef_2'
-        homeScore:
-          type: integer
-        awayScore:
-          type: integer
-        status:
-          type: string
-          enum:
-          - live
-          - scheduled
-          - finished
-        gameDate:
-          type: string
-          format: date-time
-        quarter:
-          type: integer
-          description: Current quarter for live games.
-        timeRemaining:
-          type: string
-          description: Time remaining in the current quarter.
     Game:
       type: object
       description: An NFL game.
@@ -301,6 +225,118 @@ components:
           type: string
         abbreviation:
           type: string
+    GameDetail:
+      allOf:
+      - $ref: '#/components/schemas/Game'
+      - type: object
+        properties:
+          quarterScores:
+            type: array
+            items:
+              type: object
+              properties:
+                quarter:
+                  type: string
+                homeScore:
+                  type: integer
+                awayScore:
+                  type: integer
+          teamStats:
+            type: object
+            properties:
+              home:
+                $ref: '#/components/schemas/TeamGameStats'
+              away:
+                $ref: '#/components/schemas/TeamGameStats'
+    TeamGameStats:
+      type: object
+      description: Team statistics for a single NFL game.
+      properties:
+        totalYards:
+          type: integer
+        rushingYards:
+          type: integer
+        passingYards:
+          type: integer
+        firstDowns:
+          type: integer
+        turnovers:
+          type: integer
+        penalties:
+          type: integer
+        penaltyYards:
+          type: integer
+        timeOfPossession:
+          type: string
+        thirdDownConversions:
+          type: string
+        redZoneConversions:
+          type: string
+    Game_2:
+      type: object
+      description: A basketball game with score and status.
+      properties:
+        id:
+          type: integer
+        homeTeam:
+          $ref: '#/components/schemas/TeamRef_2'
+        awayTeam:
+          $ref: '#/components/schemas/TeamRef_2'
+        homeScore:
+          type: integer
+        awayScore:
+          type: integer
+        status:
+          type: string
+          enum:
+          - live
+          - scheduled
+          - finished
+        gameDate:
+          type: string
+          format: date-time
+        quarter:
+          type: integer
+          description: Current quarter for live games.
+        timeRemaining:
+          type: string
+          description: Time remaining in the current quarter.
+    PlayerGameStats:
+      type: object
+      description: Player statistics for a single game.
+      properties:
+        playerId:
+          type: integer
+        name:
+          type: string
+        teamId:
+          type: integer
+        points:
+          type: integer
+        rebounds:
+          type: integer
+        assists:
+          type: integer
+        steals:
+          type: integer
+        blocks:
+          type: integer
+        turnovers:
+          type: integer
+        minutesPlayed:
+          type: string
+        fieldGoalsMade:
+          type: integer
+        fieldGoalsAttempted:
+          type: integer
+        threePointersMade:
+          type: integer
+        threePointersAttempted:
+          type: integer
+        freeThrowsMade:
+          type: integer
+        freeThrowsAttempted:
+          type: integer
     TeamRef_2:
       type: object
       properties:
@@ -328,40 +364,15 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/PlayerGameStats'
-    TeamGameStats:
-      type: object
-      description: Team statistics for a single NFL game.
-      properties:
-        totalYards:
-          type: integer
-        rushingYards:
-          type: integer
-        passingYards:
-          type: integer
-        firstDowns:
-          type: integer
-        turnovers:
-          type: integer
-        penalties:
-          type: integer
-        penaltyYards:
-          type: integer
-        timeOfPossession:
-          type: string
-        thirdDownConversions:
-          type: string
-        redZoneConversions:
-          type: string
+  parameters:
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token.
   responses:
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
     NotFound:
       description: Resource not found
       content:
@@ -371,14 +382,15 @@ components:
             properties:
               error:
                 type: string
-  parameters:
-    ApiKeyParam:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token.
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   securitySchemes:
     apiKey:
       type: apiKey
@@ -388,3 +400,6 @@ components:
 externalDocs:
   description: Statorium API Documentation
   url: https://statorium.com/stats-api-documentation
+x-refined-from:
+- statorium-american-football-api-openapi.yml
+- statorium-basketball-api-openapi.yml

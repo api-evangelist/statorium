@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Statorium American Football Games Matches API
-  description: The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.
+  title: Statorium Football Matches API
+  description: The Statorium Football API delivers comprehensive football/soccer data for over 200 leagues worldwide. The API provides live scores, match results, standings, fixtures, lineups, player and team statistics, head-to-head records, league logos, and translated player and team names. All responses are in JSON format and require an API token for authentication.
   version: 1.0.0
   contact:
     name: Statorium Support
@@ -102,96 +102,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    MatchStatistics:
-      type: object
-      description: Match statistics for both teams.
-      properties:
-        homePossession:
-          type: number
-          description: Home team ball possession percentage.
-        awayPossession:
-          type: number
-          description: Away team ball possession percentage.
-        homeShots:
-          type: integer
-          description: Total shots by home team.
-        awayShots:
-          type: integer
-          description: Total shots by away team.
-        homeShotsOnTarget:
-          type: integer
-          description: Shots on target by home team.
-        awayShotsOnTarget:
-          type: integer
-          description: Shots on target by away team.
-        homeCorners:
-          type: integer
-          description: Corners by home team.
-        awayCorners:
-          type: integer
-          description: Corners by away team.
-    MatchEvent:
-      type: object
-      description: An event that occurred during a match.
-      properties:
-        minute:
-          type: integer
-          description: Minute of the match when the event occurred.
-        type:
-          type: string
-          enum:
-          - goal
-          - yellow_card
-          - red_card
-          - substitution
-          - penalty
-          description: Type of match event.
-        playerId:
-          type: integer
-          description: ID of the player involved in the event.
-        teamId:
-          type: integer
-          description: ID of the team involved.
-    MatchDetail:
-      allOf:
-      - $ref: '#/components/schemas/Match'
-      - type: object
-        properties:
-          homeLineup:
-            type: array
-            items:
-              $ref: '#/components/schemas/LineupPlayer'
-            description: Home team lineup.
-          awayLineup:
-            type: array
-            items:
-              $ref: '#/components/schemas/LineupPlayer'
-            description: Away team lineup.
-          events:
-            type: array
-            items:
-              $ref: '#/components/schemas/MatchEvent'
-            description: Match events (goals, cards, substitutions).
-          statistics:
-            $ref: '#/components/schemas/MatchStatistics'
-          headToHead:
-            type: array
-            items:
-              $ref: '#/components/schemas/Match'
-            description: Previous matches between the two teams.
-    TeamRef:
-      type: object
-      description: A lightweight team reference.
-      properties:
-        id:
-          type: integer
-          description: Team identifier.
-        name:
-          type: string
-          description: Team name.
-        nameTranslated:
-          type: string
-          description: Translated team name if available.
     LineupPlayer:
       type: object
       description: A player in a match lineup.
@@ -248,17 +158,105 @@ components:
         minute:
           type: integer
           description: Current match minute (for live matches).
+    MatchDetail:
+      allOf:
+      - $ref: '#/components/schemas/Match'
+      - type: object
+        properties:
+          homeLineup:
+            type: array
+            items:
+              $ref: '#/components/schemas/LineupPlayer'
+            description: Home team lineup.
+          awayLineup:
+            type: array
+            items:
+              $ref: '#/components/schemas/LineupPlayer'
+            description: Away team lineup.
+          events:
+            type: array
+            items:
+              $ref: '#/components/schemas/MatchEvent'
+            description: Match events (goals, cards, substitutions).
+          statistics:
+            $ref: '#/components/schemas/MatchStatistics'
+          headToHead:
+            type: array
+            items:
+              $ref: '#/components/schemas/Match'
+            description: Previous matches between the two teams.
+    TeamRef:
+      type: object
+      description: A lightweight team reference.
+      properties:
+        id:
+          type: integer
+          description: Team identifier.
+        name:
+          type: string
+          description: Team name.
+        nameTranslated:
+          type: string
+          description: Translated team name if available.
+    MatchStatistics:
+      type: object
+      description: Match statistics for both teams.
+      properties:
+        homePossession:
+          type: number
+          description: Home team ball possession percentage.
+        awayPossession:
+          type: number
+          description: Away team ball possession percentage.
+        homeShots:
+          type: integer
+          description: Total shots by home team.
+        awayShots:
+          type: integer
+          description: Total shots by away team.
+        homeShotsOnTarget:
+          type: integer
+          description: Shots on target by home team.
+        awayShotsOnTarget:
+          type: integer
+          description: Shots on target by away team.
+        homeCorners:
+          type: integer
+          description: Corners by home team.
+        awayCorners:
+          type: integer
+          description: Corners by away team.
+    MatchEvent:
+      type: object
+      description: An event that occurred during a match.
+      properties:
+        minute:
+          type: integer
+          description: Minute of the match when the event occurred.
+        type:
+          type: string
+          enum:
+          - goal
+          - yellow_card
+          - red_card
+          - substitution
+          - penalty
+          description: Type of match event.
+        playerId:
+          type: integer
+          description: ID of the player involved in the event.
+        teamId:
+          type: integer
+          description: ID of the team involved.
+  parameters:
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
   responses:
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                description: Error message describing the authentication failure.
     NotFound:
       description: Resource not found
       content:
@@ -269,20 +267,22 @@ components:
               error:
                 type: string
                 description: Error message indicating the resource was not found.
-  parameters:
-    ApiKeyParam:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token for authentication.
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message describing the authentication failure.
   securitySchemes:
     apiKey:
       type: apiKey
       in: query
       name: apikey
-      description: API token provided upon subscription purchase.
+      description: API token provided upon purchase of a data subscription. Include as query parameter in all requests.
 externalDocs:
-  description: Statorium API Documentation
+  description: Statorium Football API Documentation
   url: https://statorium.com/stats-api-documentation

@@ -1,12 +1,12 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Statorium American Football Games Standings API
-  description: The Statorium American Football API provides NFL data including live game scores, schedules, player news, team statistics, rosters, and historical records. The API delivers unique daily news feeds linked to NFL players and teams along with game data in JSON format. Coverage includes all NFL teams and games for current and past seasons.
+  title: Statorium Standings API
   version: 1.0.0
   contact:
     name: Statorium Support
     url: https://statorium.com/
   termsOfService: https://statorium.com/
+  description: 'Operations tagged Standings across 3 of this provider''s published API definitions: statorium-american-football-api-openapi.yml, statorium-basketball-api-openapi.yml, statorium-football-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.statorium.com/api/v1
   description: Statorium API Server
@@ -45,6 +45,9 @@ paths:
                       $ref: '#/components/schemas/StandingEntry'
         '401':
           $ref: '#/components/responses/Unauthorized'
+    servers:
+    - url: https://api.statorium.com/api/v1
+      description: Statorium API Server
   /basketball/standings/:
     get:
       operationId: getBasketballStandings
@@ -74,6 +77,9 @@ paths:
                       $ref: '#/components/schemas/StandingEntry_2'
         '401':
           $ref: '#/components/responses/Unauthorized'
+    servers:
+    - url: https://api.statorium.com/api/v1
+      description: Statorium API Server
   /standings/:
     get:
       operationId: getStandings
@@ -109,15 +115,11 @@ paths:
                       $ref: '#/components/schemas/StandingEntry_3'
         '401':
           $ref: '#/components/responses/Unauthorized_2'
+    servers:
+    - url: https://api.statorium.com/api/v1
+      description: Statorium API Server
 components:
   parameters:
-    ApiKeyParam_2:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token for authentication.
     ApiKeyParam:
       name: apikey
       in: query
@@ -125,44 +127,23 @@ components:
       schema:
         type: string
       description: Your Statorium API token.
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    Unauthorized_2:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                description: Error message describing the authentication failure.
+    ApiKeyParam_2:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
   schemas:
-    StandingEntry_2:
+    TeamRef:
       type: object
       properties:
-        position:
+        id:
           type: integer
-        team:
-          $ref: '#/components/schemas/TeamRef_2'
-        wins:
-          type: integer
-        losses:
-          type: integer
-        winPercentage:
-          type: number
-        gamesBehind:
-          type: number
-        points:
-          type: integer
+        name:
+          type: string
+        abbreviation:
+          type: string
     StandingEntry:
       type: object
       properties:
@@ -186,15 +167,6 @@ components:
           type: integer
         pointsAgainst:
           type: integer
-    TeamRef:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        abbreviation:
-          type: string
     TeamRef_2:
       type: object
       properties:
@@ -202,6 +174,23 @@ components:
           type: integer
         name:
           type: string
+    StandingEntry_2:
+      type: object
+      properties:
+        position:
+          type: integer
+        team:
+          $ref: '#/components/schemas/TeamRef_2'
+        wins:
+          type: integer
+        losses:
+          type: integer
+        winPercentage:
+          type: number
+        gamesBehind:
+          type: number
+        points:
+          type: integer
     TeamRef_3:
       type: object
       description: A lightweight team reference.
@@ -248,12 +237,33 @@ components:
         points:
           type: integer
           description: Total points.
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    Unauthorized_2:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message describing the authentication failure.
   securitySchemes:
     apiKey:
       type: apiKey
       in: query
       name: apikey
       description: API token provided upon subscription purchase.
-externalDocs:
-  description: Statorium API Documentation
-  url: https://statorium.com/stats-api-documentation
+x-refined-from:
+- statorium-american-football-api-openapi.yml
+- statorium-basketball-api-openapi.yml
+- statorium-football-api-openapi.yml

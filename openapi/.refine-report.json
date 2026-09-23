@@ -1,28 +1,43 @@
 {
   "provider": "statorium",
   "sources": [
-    "statorium-games-api-openapi.yml",
-    "statorium-leagues-api-openapi.yml",
-    "statorium-matches-api-openapi.yml",
-    "statorium-news-api-openapi.yml",
-    "statorium-players-api-openapi.yml",
-    "statorium-seasons-api-openapi.yml",
-    "statorium-standings-api-openapi.yml",
-    "statorium-teams-api-openapi.yml"
+    "_original/statorium-american-football-api-openapi.yml",
+    "_original/statorium-basketball-api-openapi.yml",
+    "_original/statorium-football-api-openapi.yml"
   ],
   "outputs": [
     "statorium-games-api-openapi.yml",
-    "statorium-leagues-api-openapi.yml",
-    "statorium-matches-api-openapi.yml",
     "statorium-news-api-openapi.yml",
     "statorium-players-api-openapi.yml",
-    "statorium-seasons-api-openapi.yml",
     "statorium-standings-api-openapi.yml",
-    "statorium-teams-api-openapi.yml"
+    "statorium-teams-api-openapi.yml",
+    "statorium-leagues-api-openapi.yml",
+    "statorium-matches-api-openapi.yml",
+    "statorium-seasons-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "statorium-american-football-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "statorium-basketball-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "statorium-football-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'Games' spans 2 source specs (statorium-american-football-api-openapi.yml, statorium-basketball-api-openapi.yml): per-path servers applied",
+    "tag 'Players' spans 3 source specs (statorium-american-football-api-openapi.yml, statorium-basketball-api-openapi.yml, statorium-football-api-openapi.yml): per-path servers applied",
+    "tag 'Standings' spans 3 source specs (statorium-american-football-api-openapi.yml, statorium-basketball-api-openapi.yml, statorium-football-api-openapi.yml): per-path servers applied",
+    "tag 'Teams' spans 3 source specs (statorium-american-football-api-openapi.yml, statorium-basketball-api-openapi.yml, statorium-football-api-openapi.yml): per-path servers applied",
+    "tag 'Leagues' spans 2 source specs (statorium-basketball-api-openapi.yml, statorium-football-api-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "statorium-games-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "statorium-leagues-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "statorium-matches-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "statorium-news-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "statorium-players-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "statorium-seasons-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "statorium-standings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "statorium-teams-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
