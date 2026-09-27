@@ -104,21 +104,6 @@ paths:
     - url: https://api.statorium.com/api/v1
       description: Statorium API Server
 components:
-  parameters:
-    ApiKeyParam:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token.
-    ApiKeyParam_2:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token for authentication.
   responses:
     NotFound:
       description: Resource not found
@@ -232,6 +217,21 @@ components:
         shirtNumber:
           type: integer
           description: Player shirt number.
+  parameters:
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token.
+    ApiKeyParam_2:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
   securitySchemes:
     apiKey:
       type: apiKey

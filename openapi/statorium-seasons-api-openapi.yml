@@ -46,14 +46,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    ApiKeyParam:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token for authentication.
   schemas:
     Season:
       type: object
@@ -79,6 +71,14 @@ components:
         isCurrent:
           type: boolean
           description: Whether this is the current active season.
+  parameters:
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
   responses:
     Unauthorized:
       description: Missing or invalid API key

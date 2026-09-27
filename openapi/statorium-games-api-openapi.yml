@@ -180,7 +180,35 @@ paths:
     - url: https://api.statorium.com/api/v1
       description: Statorium API Server
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   schemas:
+    TeamRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        abbreviation:
+          type: string
     Game:
       type: object
       description: An NFL game.
@@ -216,14 +244,29 @@ components:
         timeRemaining:
           type: string
           description: Time remaining in the current period.
-    TeamRef:
+    TeamGameStats:
       type: object
+      description: Team statistics for a single NFL game.
       properties:
-        id:
+        totalYards:
           type: integer
-        name:
+        rushingYards:
+          type: integer
+        passingYards:
+          type: integer
+        firstDowns:
+          type: integer
+        turnovers:
+          type: integer
+        penalties:
+          type: integer
+        penaltyYards:
+          type: integer
+        timeOfPossession:
           type: string
-        abbreviation:
+        thirdDownConversions:
+          type: string
+        redZoneConversions:
           type: string
     GameDetail:
       allOf:
@@ -248,29 +291,12 @@ components:
                 $ref: '#/components/schemas/TeamGameStats'
               away:
                 $ref: '#/components/schemas/TeamGameStats'
-    TeamGameStats:
+    TeamRef_2:
       type: object
-      description: Team statistics for a single NFL game.
       properties:
-        totalYards:
+        id:
           type: integer
-        rushingYards:
-          type: integer
-        passingYards:
-          type: integer
-        firstDowns:
-          type: integer
-        turnovers:
-          type: integer
-        penalties:
-          type: integer
-        penaltyYards:
-          type: integer
-        timeOfPossession:
-          type: string
-        thirdDownConversions:
-          type: string
-        redZoneConversions:
+        name:
           type: string
     Game_2:
       type: object
@@ -301,6 +327,26 @@ components:
         timeRemaining:
           type: string
           description: Time remaining in the current quarter.
+    GameDetail_2:
+      allOf:
+      - $ref: '#/components/schemas/Game_2'
+      - type: object
+        properties:
+          quarterScores:
+            type: array
+            items:
+              type: object
+              properties:
+                quarter:
+                  type: integer
+                homeScore:
+                  type: integer
+                awayScore:
+                  type: integer
+          playerStats:
+            type: array
+            items:
+              $ref: '#/components/schemas/PlayerGameStats'
     PlayerGameStats:
       type: object
       description: Player statistics for a single game.
@@ -337,33 +383,6 @@ components:
           type: integer
         freeThrowsAttempted:
           type: integer
-    TeamRef_2:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-    GameDetail_2:
-      allOf:
-      - $ref: '#/components/schemas/Game_2'
-      - type: object
-        properties:
-          quarterScores:
-            type: array
-            items:
-              type: object
-              properties:
-                quarter:
-                  type: integer
-                homeScore:
-                  type: integer
-                awayScore:
-                  type: integer
-          playerStats:
-            type: array
-            items:
-              $ref: '#/components/schemas/PlayerGameStats'
   parameters:
     ApiKeyParam:
       name: apikey
@@ -372,25 +391,6 @@ components:
       schema:
         type: string
       description: Your Statorium API token.
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
   securitySchemes:
     apiKey:
       type: apiKey

@@ -188,21 +188,6 @@ paths:
     - url: https://api.statorium.com/api/v1
       description: Statorium API Server
 components:
-  parameters:
-    ApiKeyParam:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token.
-    ApiKeyParam_2:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token for authentication.
   responses:
     NotFound:
       description: Resource not found
@@ -222,16 +207,6 @@ components:
             properties:
               error:
                 type: string
-    NotFound_2:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                description: Error message indicating the resource was not found.
     Unauthorized_2:
       description: Missing or invalid API key
       content:
@@ -242,6 +217,16 @@ components:
               error:
                 type: string
                 description: Error message describing the authentication failure.
+    NotFound_2:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message indicating the resource was not found.
   schemas:
     Team:
       type: object
@@ -331,6 +316,21 @@ components:
         position:
           type: string
           description: Player position.
+  parameters:
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token.
+    ApiKeyParam_2:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
   securitySchemes:
     apiKey:
       type: apiKey
