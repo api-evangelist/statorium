@@ -180,26 +180,30 @@ paths:
     - url: https://api.statorium.com/api/v1
       description: Statorium API Server
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
   schemas:
+    GameDetail:
+      allOf:
+      - $ref: '#/components/schemas/Game'
+      - type: object
+        properties:
+          quarterScores:
+            type: array
+            items:
+              type: object
+              properties:
+                quarter:
+                  type: string
+                homeScore:
+                  type: integer
+                awayScore:
+                  type: integer
+          teamStats:
+            type: object
+            properties:
+              home:
+                $ref: '#/components/schemas/TeamGameStats'
+              away:
+                $ref: '#/components/schemas/TeamGameStats'
     TeamRef:
       type: object
       properties:
@@ -208,6 +212,30 @@ components:
         name:
           type: string
         abbreviation:
+          type: string
+    TeamGameStats:
+      type: object
+      description: Team statistics for a single NFL game.
+      properties:
+        totalYards:
+          type: integer
+        rushingYards:
+          type: integer
+        passingYards:
+          type: integer
+        firstDowns:
+          type: integer
+        turnovers:
+          type: integer
+        penalties:
+          type: integer
+        penaltyYards:
+          type: integer
+        timeOfPossession:
+          type: string
+        thirdDownConversions:
+          type: string
+        redZoneConversions:
           type: string
     Game:
       type: object
@@ -244,33 +272,9 @@ components:
         timeRemaining:
           type: string
           description: Time remaining in the current period.
-    TeamGameStats:
-      type: object
-      description: Team statistics for a single NFL game.
-      properties:
-        totalYards:
-          type: integer
-        rushingYards:
-          type: integer
-        passingYards:
-          type: integer
-        firstDowns:
-          type: integer
-        turnovers:
-          type: integer
-        penalties:
-          type: integer
-        penaltyYards:
-          type: integer
-        timeOfPossession:
-          type: string
-        thirdDownConversions:
-          type: string
-        redZoneConversions:
-          type: string
-    GameDetail:
+    GameDetail_2:
       allOf:
-      - $ref: '#/components/schemas/Game'
+      - $ref: '#/components/schemas/Game_2'
       - type: object
         properties:
           quarterScores:
@@ -279,18 +283,15 @@ components:
               type: object
               properties:
                 quarter:
-                  type: string
+                  type: integer
                 homeScore:
                   type: integer
                 awayScore:
                   type: integer
-          teamStats:
-            type: object
-            properties:
-              home:
-                $ref: '#/components/schemas/TeamGameStats'
-              away:
-                $ref: '#/components/schemas/TeamGameStats'
+          playerStats:
+            type: array
+            items:
+              $ref: '#/components/schemas/PlayerGameStats'
     TeamRef_2:
       type: object
       properties:
@@ -327,26 +328,6 @@ components:
         timeRemaining:
           type: string
           description: Time remaining in the current quarter.
-    GameDetail_2:
-      allOf:
-      - $ref: '#/components/schemas/Game_2'
-      - type: object
-        properties:
-          quarterScores:
-            type: array
-            items:
-              type: object
-              properties:
-                quarter:
-                  type: integer
-                homeScore:
-                  type: integer
-                awayScore:
-                  type: integer
-          playerStats:
-            type: array
-            items:
-              $ref: '#/components/schemas/PlayerGameStats'
     PlayerGameStats:
       type: object
       description: Player statistics for a single game.
@@ -383,6 +364,25 @@ components:
           type: integer
         freeThrowsAttempted:
           type: integer
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   parameters:
     ApiKeyParam:
       name: apikey
