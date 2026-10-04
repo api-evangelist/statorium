@@ -180,39 +180,26 @@ paths:
     - url: https://api.statorium.com/api/v1
       description: Statorium API Server
 components:
-  schemas:
-    GameDetail:
-      allOf:
-      - $ref: '#/components/schemas/Game'
-      - type: object
-        properties:
-          quarterScores:
-            type: array
-            items:
-              type: object
-              properties:
-                quarter:
-                  type: string
-                homeScore:
-                  type: integer
-                awayScore:
-                  type: integer
-          teamStats:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
             type: object
             properties:
-              home:
-                $ref: '#/components/schemas/TeamGameStats'
-              away:
-                $ref: '#/components/schemas/TeamGameStats'
-    TeamRef:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        abbreviation:
-          type: string
+              error:
+                type: string
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+  schemas:
     TeamGameStats:
       type: object
       description: Team statistics for a single NFL game.
@@ -272,9 +259,9 @@ components:
         timeRemaining:
           type: string
           description: Time remaining in the current period.
-    GameDetail_2:
+    GameDetail:
       allOf:
-      - $ref: '#/components/schemas/Game_2'
+      - $ref: '#/components/schemas/Game'
       - type: object
         properties:
           quarterScores:
@@ -283,51 +270,27 @@ components:
               type: object
               properties:
                 quarter:
-                  type: integer
+                  type: string
                 homeScore:
                   type: integer
                 awayScore:
                   type: integer
-          playerStats:
-            type: array
-            items:
-              $ref: '#/components/schemas/PlayerGameStats'
-    TeamRef_2:
+          teamStats:
+            type: object
+            properties:
+              home:
+                $ref: '#/components/schemas/TeamGameStats'
+              away:
+                $ref: '#/components/schemas/TeamGameStats'
+    TeamRef:
       type: object
       properties:
         id:
           type: integer
         name:
           type: string
-    Game_2:
-      type: object
-      description: A basketball game with score and status.
-      properties:
-        id:
-          type: integer
-        homeTeam:
-          $ref: '#/components/schemas/TeamRef_2'
-        awayTeam:
-          $ref: '#/components/schemas/TeamRef_2'
-        homeScore:
-          type: integer
-        awayScore:
-          type: integer
-        status:
+        abbreviation:
           type: string
-          enum:
-          - live
-          - scheduled
-          - finished
-        gameDate:
-          type: string
-          format: date-time
-        quarter:
-          type: integer
-          description: Current quarter for live games.
-        timeRemaining:
-          type: string
-          description: Time remaining in the current quarter.
     PlayerGameStats:
       type: object
       description: Player statistics for a single game.
@@ -364,25 +327,62 @@ components:
           type: integer
         freeThrowsAttempted:
           type: integer
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
+    Game_2:
+      type: object
+      description: A basketball game with score and status.
+      properties:
+        id:
+          type: integer
+        homeTeam:
+          $ref: '#/components/schemas/TeamRef_2'
+        awayTeam:
+          $ref: '#/components/schemas/TeamRef_2'
+        homeScore:
+          type: integer
+        awayScore:
+          type: integer
+        status:
+          type: string
+          enum:
+          - live
+          - scheduled
+          - finished
+        gameDate:
+          type: string
+          format: date-time
+        quarter:
+          type: integer
+          description: Current quarter for live games.
+        timeRemaining:
+          type: string
+          description: Time remaining in the current quarter.
+    GameDetail_2:
+      allOf:
+      - $ref: '#/components/schemas/Game_2'
+      - type: object
+        properties:
+          quarterScores:
+            type: array
+            items:
+              type: object
+              properties:
+                quarter:
+                  type: integer
+                homeScore:
+                  type: integer
+                awayScore:
+                  type: integer
+          playerStats:
+            type: array
+            items:
+              $ref: '#/components/schemas/PlayerGameStats'
+    TeamRef_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
   parameters:
     ApiKeyParam:
       name: apikey

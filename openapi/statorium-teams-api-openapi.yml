@@ -188,6 +188,45 @@ paths:
     - url: https://api.statorium.com/api/v1
       description: Statorium API Server
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    Unauthorized_2:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message describing the authentication failure.
+    NotFound_2:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message indicating the resource was not found.
   schemas:
     Team:
       type: object
@@ -233,6 +272,19 @@ components:
         logoUrl:
           type: string
           format: uri
+    PlayerRef:
+      type: object
+      description: A lightweight player reference.
+      properties:
+        id:
+          type: integer
+          description: Player identifier.
+        name:
+          type: string
+          description: Player name.
+        position:
+          type: string
+          description: Player position.
     Team_3:
       type: object
       description: A football team with full details.
@@ -264,58 +316,6 @@ components:
           items:
             $ref: '#/components/schemas/PlayerRef'
           description: Current squad players.
-    PlayerRef:
-      type: object
-      description: A lightweight player reference.
-      properties:
-        id:
-          type: integer
-          description: Player identifier.
-        name:
-          type: string
-          description: Player name.
-        position:
-          type: string
-          description: Player position.
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    Unauthorized:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    NotFound_2:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                description: Error message indicating the resource was not found.
-    Unauthorized_2:
-      description: Missing or invalid API key
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                description: Error message describing the authentication failure.
   parameters:
     ApiKeyParam:
       name: apikey

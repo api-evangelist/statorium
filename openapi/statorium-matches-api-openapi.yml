@@ -129,6 +129,56 @@ components:
             items:
               $ref: '#/components/schemas/Match'
             description: Previous matches between the two teams.
+    MatchStatistics:
+      type: object
+      description: Match statistics for both teams.
+      properties:
+        homePossession:
+          type: number
+          description: Home team ball possession percentage.
+        awayPossession:
+          type: number
+          description: Away team ball possession percentage.
+        homeShots:
+          type: integer
+          description: Total shots by home team.
+        awayShots:
+          type: integer
+          description: Total shots by away team.
+        homeShotsOnTarget:
+          type: integer
+          description: Shots on target by home team.
+        awayShotsOnTarget:
+          type: integer
+          description: Shots on target by away team.
+        homeCorners:
+          type: integer
+          description: Corners by home team.
+        awayCorners:
+          type: integer
+          description: Corners by away team.
+    MatchEvent:
+      type: object
+      description: An event that occurred during a match.
+      properties:
+        minute:
+          type: integer
+          description: Minute of the match when the event occurred.
+        type:
+          type: string
+          enum:
+          - goal
+          - yellow_card
+          - red_card
+          - substitution
+          - penalty
+          description: Type of match event.
+        playerId:
+          type: integer
+          description: ID of the player involved in the event.
+        teamId:
+          type: integer
+          description: ID of the team involved.
     Match:
       type: object
       description: A football match with score and basic information.
@@ -166,34 +216,6 @@ components:
         minute:
           type: integer
           description: Current match minute (for live matches).
-    MatchStatistics:
-      type: object
-      description: Match statistics for both teams.
-      properties:
-        homePossession:
-          type: number
-          description: Home team ball possession percentage.
-        awayPossession:
-          type: number
-          description: Away team ball possession percentage.
-        homeShots:
-          type: integer
-          description: Total shots by home team.
-        awayShots:
-          type: integer
-          description: Total shots by away team.
-        homeShotsOnTarget:
-          type: integer
-          description: Shots on target by home team.
-        awayShotsOnTarget:
-          type: integer
-          description: Shots on target by away team.
-        homeCorners:
-          type: integer
-          description: Corners by home team.
-        awayCorners:
-          type: integer
-          description: Corners by away team.
     TeamRef:
       type: object
       description: A lightweight team reference.
@@ -207,28 +229,6 @@ components:
         nameTranslated:
           type: string
           description: Translated team name if available.
-    MatchEvent:
-      type: object
-      description: An event that occurred during a match.
-      properties:
-        minute:
-          type: integer
-          description: Minute of the match when the event occurred.
-        type:
-          type: string
-          enum:
-          - goal
-          - yellow_card
-          - red_card
-          - substitution
-          - penalty
-          description: Type of match event.
-        playerId:
-          type: integer
-          description: ID of the player involved in the event.
-        teamId:
-          type: integer
-          description: ID of the team involved.
     LineupPlayer:
       type: object
       description: A player in a match lineup.
@@ -249,16 +249,6 @@ components:
           type: boolean
           description: Whether the player is in the starting eleven.
   responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-                description: Error message indicating the resource was not found.
     Unauthorized:
       description: Missing or invalid API key
       content:
@@ -269,6 +259,16 @@ components:
               error:
                 type: string
                 description: Error message describing the authentication failure.
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                description: Error message indicating the resource was not found.
   parameters:
     ApiKeyParam:
       name: apikey
