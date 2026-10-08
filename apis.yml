@@ -152,6 +152,12 @@ apis:
   - type: Documentation
     url: https://statorium.com/stats-api-documentation
 common:
+  - type: Plans
+    url: plans/statorium-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/statorium-rate-limits.yml
+  - type: FinOps
+    url: finops/statorium-finops.yml
   - type: AgenticAccess
     url: agentic-access/statorium-agentic-access.yml
   - type: DomainSecurity
