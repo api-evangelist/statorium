@@ -139,7 +139,31 @@ components:
               error:
                 type: string
                 description: Error message describing the authentication failure.
+  parameters:
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token.
+    ApiKeyParam_2:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
   schemas:
+    TeamRef:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        abbreviation:
+          type: string
     StandingEntry:
       type: object
       properties:
@@ -163,14 +187,12 @@ components:
           type: integer
         pointsAgainst:
           type: integer
-    TeamRef:
+    TeamRef_2:
       type: object
       properties:
         id:
           type: integer
         name:
-          type: string
-        abbreviation:
           type: string
     StandingEntry_2:
       type: object
@@ -189,13 +211,19 @@ components:
           type: number
         points:
           type: integer
-    TeamRef_2:
+    TeamRef_3:
       type: object
+      description: A lightweight team reference.
       properties:
         id:
           type: integer
+          description: Team identifier.
         name:
           type: string
+          description: Team name.
+        nameTranslated:
+          type: string
+          description: Translated team name if available.
     StandingEntry_3:
       type: object
       description: A team's position in the league standings.
@@ -229,34 +257,6 @@ components:
         points:
           type: integer
           description: Total points.
-    TeamRef_3:
-      type: object
-      description: A lightweight team reference.
-      properties:
-        id:
-          type: integer
-          description: Team identifier.
-        name:
-          type: string
-          description: Team name.
-        nameTranslated:
-          type: string
-          description: Translated team name if available.
-  parameters:
-    ApiKeyParam:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token.
-    ApiKeyParam_2:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token for authentication.
   securitySchemes:
     apiKey:
       type: apiKey

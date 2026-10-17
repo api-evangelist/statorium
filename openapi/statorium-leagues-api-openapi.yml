@@ -128,6 +128,21 @@ components:
               error:
                 type: string
                 description: Error message indicating the resource was not found.
+  parameters:
+    ApiKeyParam:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token.
+    ApiKeyParam_2:
+      name: apikey
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Statorium API token for authentication.
   schemas:
     League:
       type: object
@@ -161,21 +176,6 @@ components:
         currentSeasonId:
           type: integer
           description: ID of the currently active season.
-  parameters:
-    ApiKeyParam:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token.
-    ApiKeyParam_2:
-      name: apikey
-      in: query
-      required: true
-      schema:
-        type: string
-      description: Your Statorium API token for authentication.
   securitySchemes:
     apiKey:
       type: apiKey
